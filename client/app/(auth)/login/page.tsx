@@ -24,7 +24,7 @@ const login = () => {
 
   return (
     <div>
-      <h1 className="text-text-color py-10 text-center text-3xl font-bold">
+      <h1 className="text-text-color py-7 text-center text-3xl font-bold">
         {TRANSLATIONS[language].text.welcomeText}
       </h1>
 
@@ -45,9 +45,9 @@ const login = () => {
                 {TRANSLATIONS[language].labels.email}:
               </label>
               <input
-                type="text"
+                type="email"
                 placeholder={TRANSLATIONS[language].placeholders.email}
-                className={`bg-background-primary border  focus:border-gray-700 outline-none h-10 px-2 text-sm text-text-color placeholder:font-extralight placeholder:text-text-color ${
+                className={`placeholder:text-sm bg-background-primary border  focus:border-gray-700 outline-none h-10 px-2 text-sm text-text-color placeholder:font-extralight placeholder:text-text-color ${
                   errors.email ? "border-rose-500" : "border-border-color"
                 }`}
                 {...register("email", { required: true })}
@@ -67,7 +67,7 @@ const login = () => {
               <input
                 type="text"
                 placeholder={TRANSLATIONS[language].placeholders.password}
-                className={`bg-background-primary border  focus:border-gray-700 outline-none h-10 px-2 text-sm text-text-color placeholder:font-extralight placeholder:text-text-color ${
+                className={`placeholder:text-sm bg-background-primary border  focus:border-gray-700 outline-none h-10 px-2 text-sm text-text-color placeholder:font-extralight placeholder:text-text-color ${
                   errors.password ? "border-rose-500" : "border-border-color"
                 }`}
                 {...register("password", { required: true })}

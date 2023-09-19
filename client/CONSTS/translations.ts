@@ -24,17 +24,23 @@ const TRANSLATIONS = {
       follow: "Follow",
       unfollow: "Unfollow",
       following: "Following",
+      edit: "Edit",
+      chooseAvatar: "Choose avatar",
+      chooseLanguage: "Choose app language",
+      english: "English",
+      portuguese: "Portuguese",
     },
     placeholders: {
       email: "Type your email...",
       password: "Type your password...",
-      confirnPassword: "Type your password again...",
+      confirmPassword: "Type your password again...",
       unsername: "Type username...",
       post: "What do you have to say?",
     },
 
     validation: {
       required: "This field is required",
+      password: "Password must match",
     },
   },
   portuguese: {
@@ -62,17 +68,23 @@ const TRANSLATIONS = {
       follow: "Seguir",
       unfollow: "Deixar de seguir",
       following: "Seguindo",
+      edit: "Editar",
+      chooseAvatar: "Escolher avatar",
+      chooseLanguage: "Escolher idioma do app",
+      english: "Inglês",
+      portuguese: "Português",
     },
     placeholders: {
       email: "Digite o seu email...",
       password: "Digite sua senha...",
-      confirnPassword: "Digite sua senha de novo...",
+      confirmPassword: "Digite sua senha de novo...",
       unsername: "Digite nome de usuário...",
       post: "O que você tem a dizer?",
     },
 
     validation: {
       required: "Este campo é obrigatório",
+      password: "As senhas devem ser iguais",
     },
   },
 };

@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import TranslationContextProvider from "@/contexts/translationContext";
 
 const inter = Poppins({
   subsets: ["latin"],
@@ -21,9 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
+        <TranslationContextProvider>
+          <Header />
 
-        <div className="px-4">{children}</div>
+          <div className="px-4">{children}</div>
+        </TranslationContextProvider>
       </body>
     </html>
   );

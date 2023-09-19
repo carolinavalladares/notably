@@ -3,20 +3,20 @@ interface ITranslations {
     text: ITexts;
     labels: ILabels;
     placeholders: IPlaceholders;
-    validation: {
-      required: string;
-    };
+    validation: IValidation;
   };
   portuguese: {
     text: ITexts;
     labels: ILabels;
     placeholders: IPlaceholders;
-    validation: {
-      required: string;
-    };
+    validation: IValidation;
   };
 }
 
+interface IValidation {
+  required: string;
+  password: string;
+}
 interface ILabels {
   register: string;
   login: string;
@@ -29,6 +29,11 @@ interface ILabels {
   follow: string;
   unfollow: string;
   following: string;
+  edit: string;
+  chooseAvatar: string;
+  chooseLanguage: string;
+  english: string;
+  portuguese: string;
 }
 
 interface ITexts {
