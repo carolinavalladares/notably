@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import useTranslation from "@/hooks/useTranslation";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 interface IFormValues {
   email: string;
@@ -29,10 +30,15 @@ const login = () => {
     }
   }, []);
 
-  const submit: SubmitHandler<IFormValues> = (values) => {
+  const submit: SubmitHandler<IFormValues> = async (values) => {
     const { email, password } = values;
 
-    signIn({ email, password });
+    try {
+      await signIn({ email, password });
+    } catch (e) {
+      console.log(e);
+      return toast.error(TRANSLATIONS[language].validation.loginFailed);
+    }
   };
 
   return (

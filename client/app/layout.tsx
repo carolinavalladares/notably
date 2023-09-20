@@ -1,12 +1,14 @@
 import Header from "@/components/Header";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import TranslationContextProvider from "@/contexts/TranslationContext";
 import Footer from "@/components/Footer";
 import AuthContextProvider from "@/contexts/AuthContext";
+import { ToastContainer } from "react-toastify";
 
-const inter = Poppins({
+const poppins = Poppins({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700"],
 });
@@ -23,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} flex flex-col `}>
+      <body className={`${poppins.className} flex flex-col `}>
         <AuthContextProvider>
           <TranslationContextProvider>
             <Header />
@@ -31,6 +33,16 @@ export default function RootLayout({
             <div className="px-4 flex-1 max-w-4xl m-auto w-full">
               {children}
             </div>
+
+            <ToastContainer
+              toastStyle={{
+                backgroundColor: "var(--background-primary)",
+                fontFamily: `${poppins.style.fontFamily}`,
+                fontSize: "12px",
+                color: `var(--text)`,
+              }}
+              closeButton={false}
+            />
 
             <Footer />
           </TranslationContextProvider>

@@ -6,6 +6,7 @@ import useTranslation from "@/hooks/useTranslation";
 import AvatarSelect from "@/components/AvatarSelect";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 interface IFormValues {
   email: string;
@@ -15,7 +16,7 @@ interface IFormValues {
 }
 
 const page = () => {
-  const { user } = useAuth();
+  const { user, signUp } = useAuth();
   const router = useRouter();
   const { language } = useTranslation();
   const [image, setImage] = useState<string>("avatar_01");
@@ -36,7 +37,8 @@ const page = () => {
     const { email, name, password, confirmPassword } = values;
 
     if (password !== confirmPassword) {
-      return console.log(TRANSLATIONS[language].validation.password);
+      console.log(TRANSLATIONS[language].validation.password);
+      return toast.error(TRANSLATIONS[language].validation.password);
     }
 
     const registerData = {
@@ -45,7 +47,12 @@ const page = () => {
       password,
       image,
     };
-    console.log(registerData);
+
+    try {
+      signUp(registerData);
+    } catch (e) {
+      return toast.error(TRANSLATIONS[language].validation.registerFailed);
+    }
   };
 
   return (

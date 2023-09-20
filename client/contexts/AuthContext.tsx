@@ -1,15 +1,24 @@
 "use client";
 
-import { getLoggedInUser, login, logout } from "@/services/notablyAPI";
-import { ILoginData, IUser } from "@/types/types";
+import {
+  getLoggedInUser,
+  login,
+  logout,
+  register,
+} from "@/services/notablyAPI";
+import { ILoginData, IRegisterData, IUser } from "@/types/types";
 import { useRouter } from "next/navigation";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 import { createContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import useTranslation from "@/hooks/useTranslation";
+import TRANSLATIONS from "@/CONSTS/translations";
 
 interface IAuthContext {
   user: IUser | null;
   signIn: ({ email, password }: ILoginData) => void;
   signOut: () => void;
+  signUp: ({ email, password, name, image }: IRegisterData) => void;
 }
 
 interface IProps {
@@ -33,8 +42,6 @@ const AuthContextProvider = ({ children }: IProps) => {
   const getMe = async () => {
     const data = await getLoggedInUser();
 
-    console.log(data);
-
     if (!data) {
       return router.push("/");
     }
@@ -45,22 +52,16 @@ const AuthContextProvider = ({ children }: IProps) => {
   };
 
   const signIn = async ({ email, password }: ILoginData) => {
-    try {
-      const data = await login({ email, password });
+    const data = await login({ email, password });
 
-      console.log(data);
+    // save token in cookies
+    setCookie(undefined, "notably_token", data.token);
 
-      // save token in cookies
-      setCookie(undefined, "notably_token", data.token);
+    // save user in state
+    setUser(data.user);
 
-      // save user in state
-      setUser(data.user);
-
-      // redirect user
-      return router.push("/");
-    } catch (e) {
-      return console.log("login failed");
-    }
+    // redirect user
+    return router.push("/");
   };
 
   const signOut = async () => {
@@ -73,8 +74,14 @@ const AuthContextProvider = ({ children }: IProps) => {
     return router.push("/login");
   };
 
+  const signUp = async ({ name, email, password, image }: IRegisterData) => {
+    await register({ name, email, password, image });
+
+    router.push("/login");
+  };
+
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, signIn, signOut, signUp }}>
       {children}
     </AuthContext.Provider>
   );

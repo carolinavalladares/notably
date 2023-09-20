@@ -16,6 +16,9 @@ interface ITranslations {
 interface IValidation {
   required: string;
   password: string;
+  loginFailed: string;
+  registerFailed: string;
+  logoutFailed: string;
 }
 interface ILabels {
   register: string;

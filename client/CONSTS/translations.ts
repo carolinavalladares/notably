@@ -41,7 +41,10 @@ const TRANSLATIONS = {
 
     validation: {
       required: "This field is required",
-      password: "Password must match",
+      password: "Passwords must match",
+      loginFailed: "Failed to login... Try again.",
+      registerFailed: "Failed to register... Try again.",
+      logoutFailed: "Failed to logout...",
     },
   },
   portuguese: {
@@ -87,6 +90,9 @@ const TRANSLATIONS = {
     validation: {
       required: "Este campo é obrigatório",
       password: "As senhas devem ser iguais",
+      loginFailed: "Falha ao entrar... Tente novamente.",
+      registerFailed: "Falha ao cadastrar... Tente novamente.",
+      logoutFailed: "Falha ao sair...",
     },
   },
 };

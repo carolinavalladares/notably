@@ -1,31 +1,26 @@
-import { ILoginData } from "@/types/types";
+"use client";
+
+import { ILoginData, IRegisterData } from "@/types/types";
 import { api } from "./notablyAPIConfig";
 import { parseCookies } from "nookies";
 
 // Log in
 export const login = async ({ email, password }: ILoginData) => {
-  try {
-    return (await api.post("/auth/login", { email, password })).data;
-  } catch (error) {
-    return console.error(error);
-  }
+  return (await api.post("/auth/login", { email, password })).data;
 };
 
-// Log out
-export const logout = async () => {
-  const { notably_token: token } = parseCookies();
-  const decodedToken = decodeURI(token);
-
-  try {
-    return (
-      await api.get("/auth/logout", {
-        headers: { Authorization: `Bearer ${decodedToken}` },
-      })
-    ).data;
-  } catch (error) {
-    return console.error(error);
-  }
+// Register new user
+export const register = async ({
+  name,
+  email,
+  password,
+  image,
+}: IRegisterData) => {
+  return (await api.post("/auth/register", { name, email, password, image }))
+    .data;
 };
+
+// Routes that need authorization
 
 // get user currently logged in
 export const getLoggedInUser = async () => {
@@ -41,4 +36,16 @@ export const getLoggedInUser = async () => {
   } catch (error) {
     return console.error(error);
   }
+};
+
+// Log out
+export const logout = async () => {
+  const { notably_token: token } = parseCookies();
+  const decodedToken = decodeURI(token);
+
+  return (
+    await api.get("/auth/logout", {
+      headers: { Authorization: `Bearer ${decodedToken}` },
+    })
+  ).data;
 };
