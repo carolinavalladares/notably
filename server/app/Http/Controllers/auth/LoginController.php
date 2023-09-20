@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -25,9 +26,11 @@ class LoginController extends Controller
         // if login is successful generate a token
         $token = auth()->user()->createToken('auth_token')->plainTextToken;
 
+        $user = auth()->user();
+
 
         // send token back to client
-        return response()->json(['message' => 'user successfully logged in.', 'token' => $token], 200);
+        return response()->json(['message' => 'user successfully logged in.', 'token' => $token, 'user' => ['name' => $user->name, 'id' => $user->id, 'created_at' => $user->created_at, 'image' => $user->image, 'email' => $user->email]], 200);
     }
 
     public function logout()

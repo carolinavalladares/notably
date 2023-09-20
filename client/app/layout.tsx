@@ -28,7 +28,9 @@ export default function RootLayout({
           <TranslationContextProvider>
             <Header />
 
-            <div className="px-4 flex-1">{children}</div>
+            <div className="px-4 flex-1 max-w-4xl m-auto w-full">
+              {children}
+            </div>
 
             <Footer />
           </TranslationContextProvider>

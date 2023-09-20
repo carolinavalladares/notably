@@ -1,9 +1,11 @@
 export type IAvatars = atring[];
 
 export interface IUser {
+  id: number;
   name: string;
   email: string;
   image: string;
+  created_at: string;
 }
 
 export interface ILoginData {

@@ -13,7 +13,7 @@ interface IFormValues {
 }
 
 const login = () => {
-  const { user } = useAuth();
+  const { user, signIn } = useAuth();
   const router = useRouter();
   const { language } = useTranslation();
   const {
@@ -30,7 +30,9 @@ const login = () => {
   }, []);
 
   const submit: SubmitHandler<IFormValues> = (values) => {
-    console.log(values);
+    const { email, password } = values;
+
+    signIn({ email, password });
   };
 
   return (
@@ -76,7 +78,7 @@ const login = () => {
                 {TRANSLATIONS[language].labels.password}:
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder={TRANSLATIONS[language].placeholders.password}
                 className={`placeholder:text-sm bg-background-primary border  focus:border-gray-700 outline-none h-10 px-2 text-sm text-text-color placeholder:font-extralight placeholder:text-text-color ${
                   errors.password ? "border-rose-500" : "border-border-color"
