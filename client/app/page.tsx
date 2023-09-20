@@ -1,7 +1,9 @@
 "use client";
 import useAuth from "@/hooks/useAuth";
+
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Badge from "@/components/Badge";
 
 export default function Home() {
   const { user, signOut } = useAuth();
@@ -15,8 +17,8 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="">
-      <button onClick={signOut}>SignOut</button>
+    <main className="py-4">
+      <Badge />
     </main>
   );
 }

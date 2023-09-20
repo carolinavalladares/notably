@@ -30,6 +30,7 @@ const TRANSLATIONS = {
       english: "English",
       portuguese: "Portuguese",
       developedBy: "Developed by",
+      myProfile: "My profile",
     },
     placeholders: {
       email: "Type your email...",
@@ -78,6 +79,7 @@ const TRANSLATIONS = {
       english: "Inglês",
       portuguese: "Português",
       developedBy: "Desenvolvido por",
+      myProfile: "Meu perfil",
     },
     placeholders: {
       email: "Digite o seu email...",
