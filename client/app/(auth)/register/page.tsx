@@ -1,9 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TRANSLATIONS from "@/CONSTS/translations";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useTranslation from "@/hooks/useTranslation";
 import AvatarSelect from "@/components/AvatarSelect";
+import useAuth from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 interface IFormValues {
   email: string;
@@ -13,6 +15,8 @@ interface IFormValues {
 }
 
 const page = () => {
+  const { user } = useAuth();
+  const router = useRouter();
   const { language } = useTranslation();
   const [image, setImage] = useState<string>("avatar_01");
   const {
@@ -20,6 +24,13 @@ const page = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormValues>();
+
+  // redirect to home page in case the user is logged in
+  useEffect(() => {
+    if (user) {
+      return router.push("/");
+    }
+  }, []);
 
   const submit: SubmitHandler<IFormValues> = (values) => {
     const { email, name, password, confirmPassword } = values;

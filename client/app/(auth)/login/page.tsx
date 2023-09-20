@@ -1,9 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import TRANSLATIONS from "@/CONSTS/translations";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useTranslation from "@/hooks/useTranslation";
+import useAuth from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 interface IFormValues {
   email: string;
@@ -11,12 +13,21 @@ interface IFormValues {
 }
 
 const login = () => {
+  const { user } = useAuth();
+  const router = useRouter();
   const { language } = useTranslation();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormValues>();
+
+  // redirect to home page in case the user is logged in
+  useEffect(() => {
+    if (user) {
+      return router.push("/");
+    }
+  }, []);
 
   const submit: SubmitHandler<IFormValues> = (values) => {
     console.log(values);
