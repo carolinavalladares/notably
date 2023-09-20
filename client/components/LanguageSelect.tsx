@@ -31,7 +31,7 @@ const LanguageSelect = () => {
         >
           <Languages
             size={16}
-            strokeWidth={1.5}
+            strokeWidth={2}
             style={{ color: "var(--text-color)" }}
           />
         </button>

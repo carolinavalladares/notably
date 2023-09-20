@@ -34,6 +34,7 @@ interface ILabels {
   chooseLanguage: string;
   english: string;
   portuguese: string;
+  developedBy: string;
 }
 
 interface ITexts {

@@ -29,6 +29,7 @@ const TRANSLATIONS = {
       chooseLanguage: "Choose app language",
       english: "English",
       portuguese: "Portuguese",
+      developedBy: "Developed by",
     },
     placeholders: {
       email: "Type your email...",
@@ -73,6 +74,7 @@ const TRANSLATIONS = {
       chooseLanguage: "Escolher idioma do app",
       english: "Inglês",
       portuguese: "Português",
+      developedBy: "Desenvolvido por",
     },
     placeholders: {
       email: "Digite o seu email...",
