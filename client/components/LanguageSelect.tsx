@@ -37,25 +37,30 @@ const LanguageSelect = () => {
         </button>
 
         {open && (
-          <div className="z-50 flex flex-col bg-background-primary shadow-md shadow-shadow-color p-4 absolute right-1/2 translate-x-1/2 top-[calc(100%+10px)]">
-            {languages.map((item, i) => {
-              return (
-                <button
-                  onClick={handleLanguage}
-                  name={item}
-                  className="border-b border-border-color last-of-type:border-none py-1"
-                  key={i}
-                >
-                  <p
-                    className={`w-full text-start text-sm  ${
-                      item == language ? "font-semibold" : "font-normal"
-                    }`}
+          <div className="w-64 z-50  bg-background-primary shadow-md shadow-shadow-color p-4 absolute right-24 translate-x-1/2 top-[calc(100%+10px)]">
+            <p className="mb-2 font-medium text-sm">
+              {TRANSLATIONS[language].labels.chooseLanguage}
+            </p>
+            <div className="flex flex-col">
+              {languages.map((item, i) => {
+                return (
+                  <button
+                    onClick={handleLanguage}
+                    name={item}
+                    className="border-b border-border-color last-of-type:border-none py-1"
+                    key={i}
                   >
-                    {TRANSLATIONS[language].labels[item as keyof ILabels]}
-                  </p>
-                </button>
-              );
-            })}
+                    <p
+                      className={`w-full text-start text-sm  ${
+                        item == language ? "font-semibold" : "font-normal"
+                      }`}
+                    >
+                      {TRANSLATIONS[language].labels[item as keyof ILabels]}
+                    </p>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         )}
       </div>

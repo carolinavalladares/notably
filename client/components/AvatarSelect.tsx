@@ -49,17 +49,19 @@ const AvatarSelect = ({ setImage, image }: IProps) => {
 
         {open ? (
           <div className="bg-background-primary shadow-lg shadow-shadow-color p-4  absolute z-50 w-full max-w-96 right-1/2 translate-x-1/2 top-[calc(100%+10px)] ">
-            <p className="mb-2 font-medium">
+            <p className="mb-2 font-medium text-text-color">
               {TRANSLATIONS[language].labels.chooseAvatar}
             </p>
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap justify-center gap-2 scrollbar overflow-y-scroll overflow-x-hidden max-h-[313px]">
               {AVATARS.map((avatar, i) => {
                 return (
                   <div
                     key={i}
                     id={avatar}
                     onClick={(e) => handleAvatar(e)}
-                    className="w-14 h-14 overflow-hidden rounded-full flex items-start justify-center border border-border-color bg-white p-1 cursor-pointer"
+                    className={`w-14 h-14 overflow-hidden rounded-full flex items-start justify-center border  bg-white p-1 cursor-pointer ${
+                      avatar == image ? "border-accent" : "border-border-color"
+                    }`}
                   >
                     <img
                       className="w-3/4"

@@ -11,6 +11,10 @@
   --text: #000000;
   --accent: rgb(255, 111, 0);
   --input-border: rgb(209 213 219 / 0.5);
+
+  --scrollbar-thumb: rgba(0, 0, 0, 0.4);
+
+  --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,6 +29,10 @@
     --text: #ffffff;
     --accent: rgb(255, 111, 0);
     --input-border: rgba(129, 132, 136, 0.8);
+
+    --scrollbar-thumb: rgba(255, 255, 255, 0.4);
+
+    --shadow-color: rgba(0, 0, 0, 0.8);
   }
 }
 body,
@@ -41,4 +49,20 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+/* Scroll bar styles */
+.scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 4px;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 4px;
 }
