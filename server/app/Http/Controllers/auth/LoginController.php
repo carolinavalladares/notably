@@ -35,6 +35,8 @@ class LoginController extends Controller
 
     public function logout()
     {
+
+
         // get current token being used and delete it
         auth()->user()->currentAccessToken()->delete();
 

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Home() {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const router = useRouter();
 
   // redirect to login page in case the user is not logged in
@@ -14,5 +14,9 @@ export default function Home() {
     }
   }, []);
 
-  return <main className=""></main>;
+  return (
+    <main className="">
+      <button onClick={signOut}>SignOut</button>
+    </main>
+  );
 }

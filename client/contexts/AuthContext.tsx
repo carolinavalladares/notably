@@ -1,14 +1,15 @@
 "use client";
 
-import { getLoggedInUser, login } from "@/services/notablyAPI";
+import { getLoggedInUser, login, logout } from "@/services/notablyAPI";
 import { ILoginData, IUser } from "@/types/types";
 import { useRouter } from "next/navigation";
-import { parseCookies, setCookie } from "nookies";
+import { parseCookies, setCookie, destroyCookie } from "nookies";
 import { createContext, useEffect, useState } from "react";
 
 interface IAuthContext {
   user: IUser | null;
-  signIn: ({ email, password }: ILoginData) => {};
+  signIn: ({ email, password }: ILoginData) => void;
+  signOut: () => void;
 }
 
 interface IProps {
@@ -19,7 +20,6 @@ export const AuthContext = createContext({} as IAuthContext);
 
 const AuthContextProvider = ({ children }: IProps) => {
   const [user, setUser] = useState<IUser | null>(null);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -34,6 +34,10 @@ const AuthContextProvider = ({ children }: IProps) => {
     const data = await getLoggedInUser();
 
     console.log(data);
+
+    if (!data) {
+      return router.push("/");
+    }
 
     setUser(data.data);
 
@@ -59,8 +63,18 @@ const AuthContextProvider = ({ children }: IProps) => {
     }
   };
 
+  const signOut = async () => {
+    await logout();
+
+    setUser(null);
+
+    destroyCookie(undefined, "notably_token");
+
+    return router.push("/login");
+  };
+
   return (
-    <AuthContext.Provider value={{ user, signIn }}>
+    <AuthContext.Provider value={{ user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
