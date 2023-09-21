@@ -48,6 +48,7 @@ interface ITexts {
   noPosts: string;
   loginTitle: string;
   registerTitle: string;
+  memberSince: string;
 }
 
 interface IPlaceholders {

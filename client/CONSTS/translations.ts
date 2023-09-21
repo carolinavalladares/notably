@@ -10,6 +10,7 @@ const TRANSLATIONS = {
       registerTitle: "Create an account",
       noAccount: "Don't have an account yet?",
       hasAccount: "Already have an account?",
+      memberSince: "Member since",
     },
 
     labels: {
@@ -59,6 +60,7 @@ const TRANSLATIONS = {
       registerTitle: "Criar uma conta",
       noAccount: "Não tem uma conta ainda?",
       hasAccount: "Já tem uma conta?",
+      memberSince: "Membro desde",
     },
 
     labels: {

@@ -4,6 +4,8 @@ import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Badge from "@/components/Badge";
+import Timeline from "@/components/Timeline";
+import Post from "@/components/Post";
 
 export default function Home() {
   const { user, signOut } = useAuth();
@@ -17,8 +19,14 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="py-4">
+    <main className="py-4 flex items-start gap-4">
       <Badge />
+
+      <div>
+        <Timeline />
+
+        <Post />
+      </div>
     </main>
   );
 }

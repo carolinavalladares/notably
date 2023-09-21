@@ -18,3 +18,8 @@ export interface IRegisterData {
   image: string;
   name: string;
 }
+
+export interface IMonths {
+  english: string[];
+  portuguese: string[];
+}
