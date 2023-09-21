@@ -49,3 +49,34 @@ export const logout = async () => {
     })
   ).data;
 };
+
+// like post
+export const likePost = async (postId: number) => {
+  const { notably_token: token } = parseCookies();
+  const decodedToken = decodeURI(token);
+
+  try {
+    const data = await api.get(`/posts/like/${postId}`, {
+      headers: { Authorization: `Bearer ${decodedToken}` },
+    });
+
+    console.log(data);
+  } catch (e) {
+    return console.log(e);
+  }
+};
+// unlike post
+export const unlikePost = async (postId: number) => {
+  const { notably_token: token } = parseCookies();
+  const decodedToken = decodeURI(token);
+
+  try {
+    const data = await api.get(`/posts/unlike/${postId}`, {
+      headers: { Authorization: `Bearer ${decodedToken}` },
+    });
+
+    console.log(data);
+  } catch (e) {
+    return console.log(e);
+  }
+};

@@ -17,6 +17,7 @@ interface IAuthContext {
   signIn: ({ email, password }: ILoginData) => void;
   signOut: () => void;
   signUp: ({ email, password, name, image }: IRegisterData) => void;
+  getMe: () => void;
 }
 
 interface IProps {
@@ -80,7 +81,7 @@ const AuthContextProvider = ({ children }: IProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut, signUp }}>
+    <AuthContext.Provider value={{ user, signIn, signOut, signUp, getMe }}>
       {children}
     </AuthContext.Provider>
   );

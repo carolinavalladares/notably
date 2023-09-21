@@ -23,7 +23,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'image' => $this->image,
             'created_at' => $this->created_at,
-            'posts' => $this->posts,
+            'posts' => PostResource::collection($this->posts),
             'followers' => $this->followers,
             'following' => $this->following,
             'likes' => $this->likes

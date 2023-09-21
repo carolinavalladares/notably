@@ -9,7 +9,8 @@ const Avatar = ({ image, width }: IProps) => {
   return (
     <div className={`relative`}>
       <div
-        className={`w-[${width}] h-[${width}]  m-auto overflow-hidden rounded-full flex items-start justify-center border border-border-color bg-white p-1`}
+        style={{ width: width, height: width }}
+        className={` m-auto overflow-hidden rounded-full flex items-start justify-center border border-border-color bg-white p-1`}
       >
         <img
           className="w-3/4"

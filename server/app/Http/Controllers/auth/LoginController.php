@@ -30,7 +30,7 @@ class LoginController extends Controller
 
 
         // send token back to client
-        return response()->json(['message' => 'user successfully logged in.', 'token' => $token, 'user' => ['name' => $user->name, 'id' => $user->id, 'created_at' => $user->created_at, 'image' => $user->image, 'email' => $user->email]], 200);
+        return response()->json(['message' => 'user successfully logged in.', 'token' => $token, 'user' => UserResource::make($user)], 200);
     }
 
     public function logout()

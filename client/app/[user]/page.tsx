@@ -17,14 +17,12 @@ const page = () => {
     if (!user) {
       return router.push("/login");
     }
-
-    console.log(user);
   }, [user]);
 
   return (
     <div className="py-4">
       {user && (
-        <section className="bg-background-primary text-text-color p-4 flex flex-col items-center">
+        <section className="bg-background-primary text-text-color p-4 flex flex-col items-center shadow-sm">
           <div>
             <Avatar width="70px" image={user.image} />
             <div className="mb-2">

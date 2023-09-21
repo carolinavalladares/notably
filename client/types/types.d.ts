@@ -9,6 +9,7 @@ export interface IUser {
   posts?: IPost[];
   followers: IUser[];
   following: IUser[];
+  likes: IPost[];
 }
 
 export interface ILoginData {
@@ -33,4 +34,5 @@ export interface IPost {
   created_at: string;
   user_id: number;
   likes?: IUser[];
+  id: number;
 }
