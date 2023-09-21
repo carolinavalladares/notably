@@ -7,7 +7,8 @@ import { Star } from "lucide-react";
 import { IPost } from "@/types/types";
 import useAuth from "@/hooks/useAuth";
 import { likePost, unlikePost } from "@/services/notablyAPI";
-import { useRouter } from "next/navigation";
+import TRANSLATIONS from "@/CONSTS/translations";
+import Display from "./Display";
 
 interface IProps {
   post: IPost;
@@ -17,7 +18,6 @@ const Post = ({ post }: IProps) => {
   const { language } = useTranslation();
   const { user, getMe } = useAuth();
   const [likesPost, setLikesPost] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     if (user) {
@@ -46,6 +46,7 @@ const Post = ({ post }: IProps) => {
         setLikesPost(true);
       }
 
+      // refresh user
       getMe();
     } catch (e) {
       return console.log(e);
@@ -71,14 +72,24 @@ const Post = ({ post }: IProps) => {
             </p>
           </div>
 
-          <p className="text-sm mt-2 ml-3">{post.content}</p>
+          <p className="text-sm mt-2 ml-3">
+            <Display content={post.content} />
+          </p>
 
           <div
             className={`mt-2 ml-4 border-t border-border-color pt-2  ${
               likesPost ? "text-accent" : "text-text-color"
             }`}
           >
-            <button onClick={handleLike} className={`flex items-center gap-1 `}>
+            <button
+              title={
+                likesPost
+                  ? TRANSLATIONS[language].labels.unlike
+                  : TRANSLATIONS[language].labels.like
+              }
+              onClick={handleLike}
+              className={`flex items-center gap-1 `}
+            >
               <Star
                 size={16}
                 strokeWidth={1.5}

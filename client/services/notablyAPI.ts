@@ -59,8 +59,6 @@ export const likePost = async (postId: number) => {
     const data = await api.get(`/posts/like/${postId}`, {
       headers: { Authorization: `Bearer ${decodedToken}` },
     });
-
-    console.log(data);
   } catch (e) {
     return console.log(e);
   }
@@ -74,8 +72,6 @@ export const unlikePost = async (postId: number) => {
     const data = await api.get(`/posts/unlike/${postId}`, {
       headers: { Authorization: `Bearer ${decodedToken}` },
     });
-
-    console.log(data);
   } catch (e) {
     return console.log(e);
   }

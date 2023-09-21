@@ -64,3 +64,15 @@ body {
   background-color: var(--scrollbar-thumb);
   border-radius: 4px;
 }
+
+/* Tiptap Editor */
+
+/* Placeholder (at the top) */
+.tiptap p.is-editor-empty:first-child::before {
+  color: var(--text);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  font-weight: 200;
+}

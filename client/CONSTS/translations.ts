@@ -19,6 +19,7 @@ const TRANSLATIONS = {
       login: "Login",
       logout: "Logout",
       like: "Like",
+      unlike: "Unlike",
       email: "Email",
       username: "Username",
       password: "Password",
@@ -33,6 +34,7 @@ const TRANSLATIONS = {
       portuguese: "Portuguese",
       developedBy: "Developed by",
       myProfile: "My profile",
+      post: "Post",
     },
     placeholders: {
       email: "Type your email...",
@@ -70,6 +72,7 @@ const TRANSLATIONS = {
       login: "Entrar",
       logout: "Sair",
       like: "Curtir",
+      unlike: "Descurtir",
       email: "Email",
       username: "Nome de usuário",
       password: "Senha",
@@ -84,6 +87,7 @@ const TRANSLATIONS = {
       portuguese: "Português",
       developedBy: "Desenvolvido por",
       myProfile: "Meu perfil",
+      post: "Postar",
     },
     placeholders: {
       email: "Digite o seu email...",

@@ -25,6 +25,7 @@ interface ILabels {
   login: string;
   logout: string;
   like: string;
+  unlike: string;
   email: string;
   username: string;
   password: string;
@@ -38,6 +39,7 @@ interface ILabels {
   english: string;
   portuguese: string;
   developedBy: string;
+  post: string;
 }
 
 interface ITexts {
