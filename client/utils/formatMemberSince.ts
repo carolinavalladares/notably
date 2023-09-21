@@ -34,8 +34,6 @@ const months: IMonths = {
 export function formatMemberSince(dateString: string, language: string) {
   const [date, time] = dateString.split("T");
 
-  console.log("date:", date, "time:", time);
-
   const [year, month, day] = date.split("-");
   const [hours, minutes, seconds] = time.split(":");
 

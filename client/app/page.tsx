@@ -22,11 +22,7 @@ export default function Home() {
     <main className="py-4 flex items-start gap-4">
       <Badge />
 
-      <div>
-        <Timeline />
-
-        <Post />
-      </div>
+      <Timeline />
     </main>
   );
 }

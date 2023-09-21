@@ -6,6 +6,9 @@ export interface IUser {
   email: string;
   image: string;
   created_at: string;
+  posts?: IPost[];
+  followers: IUser[];
+  following: IUser[];
 }
 
 export interface ILoginData {
@@ -22,4 +25,12 @@ export interface IRegisterData {
 export interface IMonths {
   english: string[];
   portuguese: string[];
+}
+
+export interface IPost {
+  author: IUser;
+  content: string;
+  created_at: string;
+  user_id: number;
+  likes?: IUser[];
 }

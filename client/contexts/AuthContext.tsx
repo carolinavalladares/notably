@@ -10,9 +10,7 @@ import { ILoginData, IRegisterData, IUser } from "@/types/types";
 import { useRouter } from "next/navigation";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 import { createContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import useTranslation from "@/hooks/useTranslation";
-import TRANSLATIONS from "@/CONSTS/translations";
+import { usePathname } from "next/navigation";
 
 interface IAuthContext {
   user: IUser | null;
@@ -30,6 +28,7 @@ export const AuthContext = createContext({} as IAuthContext);
 const AuthContextProvider = ({ children }: IProps) => {
   const [user, setUser] = useState<IUser | null>(null);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const { notably_token: token } = parseCookies();
@@ -43,12 +42,12 @@ const AuthContextProvider = ({ children }: IProps) => {
     const data = await getLoggedInUser();
 
     if (!data) {
-      return router.push("/");
+      return router.push("/login");
     }
 
     setUser(data.data);
 
-    return router.push("/");
+    return router.push(pathname);
   };
 
   const signIn = async ({ email, password }: ILoginData) => {

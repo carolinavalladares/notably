@@ -27,7 +27,7 @@ const Badge = () => {
         <div className="flex flex-col items-center justify-center">
           <a
             title={TRANSLATIONS[language].labels.myProfile}
-            href={`/user/${user.id}`}
+            href={`/${user.id}`}
           >
             <Avatar width="60px" image={user.image as string} />
 
