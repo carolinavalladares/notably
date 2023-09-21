@@ -7,12 +7,10 @@ import useTranslation from "@/hooks/useTranslation";
 import TRANSLATIONS from "@/CONSTS/translations";
 import { Bold, Italic, Underline as UnderlineIcon } from "lucide-react";
 import Underline from "@tiptap/extension-underline";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 const Editor = () => {
   const { language } = useTranslation();
-  const router = useRouter();
+
   let editor = useEditor(
     {
       extensions: [
@@ -36,6 +34,7 @@ const Editor = () => {
     <div>
       <div className="border-b border-border-color pb-2 mb-2">
         <button
+          title={TRANSLATIONS[language].labels.bold}
           className={`p-2 rounded-sm  transition-all duration-150 ${
             editor?.isActive("bold")
               ? "bg-accent text-white "
@@ -46,6 +45,7 @@ const Editor = () => {
           <Bold size={16} strokeWidth={1.75} />
         </button>
         <button
+          title={TRANSLATIONS[language].labels.underline}
           onClick={() => editor?.chain().focus().toggleUnderline().run()}
           className={`p-2 rounded-sm   transition-all duration-150 ${
             editor?.isActive("underline")
@@ -56,6 +56,7 @@ const Editor = () => {
           <UnderlineIcon size={16} strokeWidth={1.75} />
         </button>
         <button
+          title={TRANSLATIONS[language].labels.italic}
           onClick={() => editor?.chain().focus().toggleItalic().run()}
           className={`p-2 rounded-sm  transition-all duration-150 ${
             editor?.isActive("italic")
@@ -67,7 +68,7 @@ const Editor = () => {
         </button>
       </div>
       <div className="px-2">
-        <EditorContent editor={editor} />
+        <EditorContent spellCheck={false} editor={editor} />
       </div>
     </div>
   );

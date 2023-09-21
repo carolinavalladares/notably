@@ -12,6 +12,7 @@ const TRANSLATIONS = {
       hasAccount: "Already have an account?",
       memberSince: "Member since",
       myPosts: "My posts",
+      createPost: "Create new post",
     },
 
     labels: {
@@ -35,6 +36,9 @@ const TRANSLATIONS = {
       developedBy: "Developed by",
       myProfile: "My profile",
       post: "Post",
+      underline: "Underline",
+      bold: "Bold",
+      italic: "Italic",
     },
     placeholders: {
       email: "Type your email...",
@@ -65,6 +69,7 @@ const TRANSLATIONS = {
       hasAccount: "Já tem uma conta?",
       memberSince: "Membro desde",
       myPosts: "Minhas publicações",
+      createPost: "Criar nova publicação",
     },
 
     labels: {
@@ -88,6 +93,9 @@ const TRANSLATIONS = {
       developedBy: "Desenvolvido por",
       myProfile: "Meu perfil",
       post: "Postar",
+      underline: "Sublinhado",
+      bold: "Negrito",
+      italic: "Itálico",
     },
     placeholders: {
       email: "Digite o seu email...",

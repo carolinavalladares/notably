@@ -8,9 +8,11 @@ const page = () => {
   const { language } = useTranslation();
   return (
     <div className="text-text-color ">
-      <h1 className="my-4 text-lg font-medium">Create new post</h1>
+      <h1 className="my-4 text-lg font-medium">
+        {TRANSLATIONS[language].text.createPost}
+      </h1>
 
-      <div className="p-4 bg-background-primary text">
+      <div className="p-4 bg-background-primary text-text-color shadow-sm">
         <Editor />
 
         <div className="flex justify-end">

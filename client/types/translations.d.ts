@@ -40,6 +40,9 @@ interface ILabels {
   portuguese: string;
   developedBy: string;
   post: string;
+  underline: string;
+  bold: string;
+  italic: string;
 }
 
 interface ITexts {
@@ -51,6 +54,8 @@ interface ITexts {
   loginTitle: string;
   registerTitle: string;
   memberSince: string;
+  myPosts: string;
+  createPost: string;
 }
 
 interface IPlaceholders {
