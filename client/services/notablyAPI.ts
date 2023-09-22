@@ -1,6 +1,6 @@
 "use client";
 
-import { ILoginData, IRegisterData } from "@/types/types";
+import { ILoginData, IPostData, IRegisterData } from "@/types/types";
 import { api } from "./notablyAPIConfig";
 import { parseCookies } from "nookies";
 
@@ -75,4 +75,18 @@ export const unlikePost = async (postId: number) => {
   } catch (e) {
     return console.log(e);
   }
+};
+
+// create new post
+export const createPost = async ({ content }: IPostData) => {
+  const { notably_token: token } = parseCookies();
+  const decodedToken = decodeURI(token);
+
+  return await api.post(
+    "/posts/create",
+    { content },
+    {
+      headers: { Authorization: `Bearer ${decodedToken}` },
+    }
+  );
 };

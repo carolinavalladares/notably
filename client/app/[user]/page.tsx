@@ -22,7 +22,7 @@ const page = () => {
   return (
     <div className="py-4">
       {user && (
-        <section className="bg-background-primary text-text-color p-4 flex flex-col items-center shadow-sm">
+        <section className="bg-background-primary text-text-color p-4 flex flex-col items-center shadow-md">
           <div>
             <Avatar width="70px" image={user.image} />
             <div className="mb-2">

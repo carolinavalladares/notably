@@ -36,3 +36,7 @@ export interface IPost {
   likes?: IUser[];
   id: number;
 }
+
+export interface IPostData {
+  content: string;
+}

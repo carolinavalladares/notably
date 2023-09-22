@@ -8,7 +8,12 @@ import TRANSLATIONS from "@/CONSTS/translations";
 import { Bold, Italic, Underline as UnderlineIcon } from "lucide-react";
 import Underline from "@tiptap/extension-underline";
 
-const Editor = () => {
+interface IProps {
+  setContent: React.Dispatch<string>;
+  content: string;
+}
+
+const Editor = ({ setContent, content }: IProps) => {
   const { language } = useTranslation();
 
   let editor = useEditor(
@@ -20,6 +25,9 @@ const Editor = () => {
           placeholder: TRANSLATIONS[language].placeholders.post,
         }),
       ],
+      onUpdate: (editor) => {
+        setContent(editor.editor.getHTML());
+      },
       autofocus: true,
       editorProps: {
         attributes: {
@@ -68,7 +76,7 @@ const Editor = () => {
         </button>
       </div>
       <div className="px-2">
-        <EditorContent spellCheck={false} editor={editor} />
+        <EditorContent content={content} spellCheck={false} editor={editor} />
       </div>
     </div>
   );

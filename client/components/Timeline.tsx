@@ -9,9 +9,7 @@ const Timeline = () => {
   const { language } = useTranslation();
 
   return (
-    <section className="text-text-color w-full">
-      <h2 className="font-medium">Timeline</h2>
-
+    <div className="text-text-color w-full">
       <div>
         {posts.length < 1 ? (
           <div className="flex items-center justify-center h-60 font-light text-sm">
@@ -21,7 +19,7 @@ const Timeline = () => {
           <div></div>
         )}
       </div>
-    </section>
+    </div>
   );
 };
 

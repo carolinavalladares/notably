@@ -54,7 +54,7 @@ const Post = ({ post }: IProps) => {
   };
 
   return (
-    <div className="bg-background-primary text-text-color p-4 shadow-sm">
+    <div className="bg-background-primary text-text-color p-4 shadow-md">
       {post ? (
         <div>
           <div className="flex items-center justify-between gap-2">
@@ -72,9 +72,9 @@ const Post = ({ post }: IProps) => {
             </p>
           </div>
 
-          <p className="text-sm mt-2 ml-3">
+          <div className="text-sm mt-2 ml-3">
             <Display content={post.content} />
-          </p>
+          </div>
 
           <div
             className={`mt-2 ml-4 border-t border-border-color pt-2  ${
