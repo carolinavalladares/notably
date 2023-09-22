@@ -2,9 +2,13 @@ export function formatDate(
   dateString: string,
   language: "english" | "portuguese"
 ) {
-  const [date, time] = dateString.split("T");
+  const dateLocale = new Date(dateString).toLocaleString("pt-br");
 
-  const [year, month, day] = date.split("-");
+  console.log(dateLocale);
+
+  const [date, time] = dateLocale.split(", ");
+
+  const [day, month, year] = date.split("/");
   const [hours, minutes, seconds] = time.split(":");
 
   if (language == "english") {
