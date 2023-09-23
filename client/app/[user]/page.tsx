@@ -43,11 +43,11 @@ const page = () => {
           <div>
             <div className="flex items-center justify-center text-sm gap-4 mb-2">
               <div className="flex flex-col items-center">
-                <span>Followers</span>
+                <span>{TRANSLATIONS[language].text.followers}</span>
                 <span className="font-medium">{user.followers.length}</span>
               </div>
               <div className="flex flex-col items-center">
-                <span>Following</span>
+                <span>{TRANSLATIONS[language].text.following}</span>
                 <span className="font-medium">{user.following.length}</span>
               </div>
             </div>

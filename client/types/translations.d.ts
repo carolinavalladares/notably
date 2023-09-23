@@ -56,6 +56,8 @@ interface ITexts {
   memberSince: string;
   myPosts: string;
   createPost: string;
+  followers: string;
+  following: string;
 }
 
 interface IPlaceholders {

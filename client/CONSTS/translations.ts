@@ -13,6 +13,8 @@ const TRANSLATIONS = {
       memberSince: "Member since",
       myPosts: "My posts",
       createPost: "Create new post",
+      followers: "Followers",
+      following: "Following",
     },
 
     labels: {
@@ -70,6 +72,8 @@ const TRANSLATIONS = {
       memberSince: "Membro desde",
       myPosts: "Minhas publicações",
       createPost: "Criar nova publicação",
+      followers: "Seguidores",
+      following: "Seguindo",
     },
 
     labels: {
