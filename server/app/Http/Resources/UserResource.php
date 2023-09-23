@@ -15,6 +15,9 @@ class UserResource extends JsonResource
     public function toArray(Request $request): array
     {
 
+        $posts = PostResource::collection($this->posts->sortByDesc(function ($post) {
+            return $post->created_at;
+        }));
 
 
         return [
@@ -23,7 +26,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'image' => $this->image,
             'created_at' => $this->created_at,
-            'posts' => PostResource::collection($this->posts),
+            'posts' => $posts,
             'followers' => $this->followers,
             'following' => $this->following,
             'likes' => $this->likes
