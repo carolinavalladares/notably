@@ -16,6 +16,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Notably",
   description: "Social Media",
+  icons: ["./favicon.ico"],
 };
 
 export default function RootLayout({
