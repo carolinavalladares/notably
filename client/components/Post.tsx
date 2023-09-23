@@ -1,5 +1,5 @@
 "user client";
-import React, { LegacyRef, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "./Avatar";
 import { formatDate } from "@/utils/formatDate";
 import useTranslation from "@/hooks/useTranslation";
@@ -18,7 +18,6 @@ const Post = ({ post }: IProps) => {
   const { language } = useTranslation();
   const { user, getMe } = useAuth();
   const [likesPost, setLikesPost] = useState(false);
-  const contentRef = useRef<HTMLDivElement | undefined>();
 
   const handleLike = async () => {
     if (!user) {
@@ -75,11 +74,7 @@ const Post = ({ post }: IProps) => {
 
           {/* Post content */}
           <div className="flex flex-col ">
-            <div className={`text-sm mt-2 ml-3 h-fit  `}>
-              <div className="h-full" ref={contentRef as any}>
-                <Display content={post.content} />
-              </div>
-            </div>
+            <Display content={post.content} />
           </div>
 
           <div
