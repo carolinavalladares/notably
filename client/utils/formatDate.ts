@@ -4,8 +4,6 @@ export function formatDate(
 ) {
   const dateLocale = new Date(dateString).toLocaleString("pt-br");
 
-  console.log(dateLocale);
-
   const [date, time] = dateLocale.split(", ");
 
   const [day, month, year] = date.split("/");

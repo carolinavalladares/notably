@@ -1,0 +1,2 @@
+export const CHARACTERLIMIT = 500;
+export const DISPLAYHEIGHTLIMIT = 150;

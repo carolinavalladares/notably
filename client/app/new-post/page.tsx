@@ -7,6 +7,7 @@ import { createPost } from "@/services/notablyAPI";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { CHARACTERLIMIT } from "@/CONSTS/editor";
 
 const page = () => {
   const [content, setContent] = useState("");

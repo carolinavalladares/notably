@@ -1,5 +1,5 @@
 "user client";
-import React, { useEffect, useState } from "react";
+import React, { LegacyRef, useEffect, useRef, useState } from "react";
 import Avatar from "./Avatar";
 import { formatDate } from "@/utils/formatDate";
 import useTranslation from "@/hooks/useTranslation";
@@ -18,18 +18,7 @@ const Post = ({ post }: IProps) => {
   const { language } = useTranslation();
   const { user, getMe } = useAuth();
   const [likesPost, setLikesPost] = useState(false);
-
-  useEffect(() => {
-    if (user) {
-      const like = post.likes?.find((like) => {
-        return like.id == user.id;
-      });
-
-      if (like) {
-        setLikesPost(true);
-      }
-    }
-  }, [user]);
+  const contentRef = useRef<HTMLDivElement | undefined>();
 
   const handleLike = async () => {
     if (!user) {
@@ -53,6 +42,18 @@ const Post = ({ post }: IProps) => {
     }
   };
 
+  useEffect(() => {
+    if (user) {
+      const like = post.likes?.find((like) => {
+        return like.id == user.id;
+      });
+
+      if (like) {
+        setLikesPost(true);
+      }
+    }
+  }, [user]);
+
   return (
     <div className="bg-background-primary text-text-color p-4 shadow-md">
       {post ? (
@@ -72,8 +73,13 @@ const Post = ({ post }: IProps) => {
             </p>
           </div>
 
-          <div className="text-sm mt-2 ml-3">
-            <Display content={post.content} />
+          {/* Post content */}
+          <div className="flex flex-col ">
+            <div className={`text-sm mt-2 ml-3 h-fit  `}>
+              <div className="h-full" ref={contentRef as any}>
+                <Display content={post.content} />
+              </div>
+            </div>
           </div>
 
           <div
