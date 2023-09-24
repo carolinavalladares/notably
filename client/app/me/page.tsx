@@ -1,31 +1,23 @@
 "use client";
-
-import TRANSLATIONS from "@/CONSTS/translations";
+import useAuth from "@/hooks/useAuth";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Avatar from "@/components/Avatar";
-import Post from "@/components/Post";
+import TRANSLATIONS from "@/CONSTS/translations";
 import useTranslation from "@/hooks/useTranslation";
-import { getOneUser } from "@/services/notablyAPI";
-import { IUser } from "@/types/types";
 import { formatMemberSince } from "@/utils/formatMemberSince";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import Post from "@/components/Post";
 
 const page = () => {
-  const [user, setUser] = useState<IUser | null>(null);
-  const path = usePathname();
+  const { user } = useAuth();
+  const router = useRouter();
   const { language } = useTranslation();
 
-  const getUser = async () => {
-    const id = Number(path[1]);
-
-    const resp = await getOneUser(id);
-
-    setUser(resp);
-  };
-
   useEffect(() => {
-    getUser();
-  }, []);
+    if (!user) {
+      return router.push("/login");
+    }
+  }, [user]);
 
   return (
     <div className="py-4">
@@ -64,8 +56,8 @@ const page = () => {
       )}
 
       <section className="mt-4">
-        <h2 className="text-lg font-medium ml-2 mb-2 capitalize">
-          {TRANSLATIONS[language].text.posts}
+        <h2 className="text-lg font-medium ml-2 mb-2">
+          {TRANSLATIONS[language].text.myPosts}
         </h2>
 
         {user && user.posts && user.posts.length >= 1 ? (

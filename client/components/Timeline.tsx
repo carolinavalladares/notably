@@ -1,12 +1,30 @@
 "use client";
 import TRANSLATIONS from "@/CONSTS/translations";
+import useAuth from "@/hooks/useAuth";
 import useTranslation from "@/hooks/useTranslation";
-import { useState } from "react";
+import { fetchTimeline } from "@/services/notablyAPI";
+import { useEffect, useState } from "react";
 
 const Timeline = () => {
   const [posts, setPosts] = useState([]);
-
   const { language } = useTranslation();
+  const { user } = useAuth();
+
+  const getTimeline = async () => {
+    try {
+      const timeline = (await fetchTimeline()).data.timeline;
+
+      console.log(timeline);
+
+      setPosts(timeline);
+    } catch (e) {
+      return console.log("Error fetching timeline: ", e);
+    }
+  };
+
+  useEffect(() => {
+    getTimeline();
+  }, [user]);
 
   return (
     <div className="text-text-color w-full">

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+
 import Avatar from "./Avatar";
 import useAuth from "@/hooks/useAuth";
 import TRANSLATIONS from "@/CONSTS/translations";
@@ -25,10 +25,7 @@ const Badge = () => {
       {/* User info */}
       {user && (
         <div className="flex flex-col items-center justify-center">
-          <a
-            title={TRANSLATIONS[language].labels.myProfile}
-            href={`/${user.id}`}
-          >
+          <a title={TRANSLATIONS[language].labels.myProfile} href={`/me`}>
             <Avatar width="60px" image={user.image as string} />
 
             <div className="mb-2">

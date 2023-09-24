@@ -15,6 +15,7 @@ const TRANSLATIONS = {
       createPost: "Create new post",
       followers: "Followers",
       following: "Following",
+      whoToFollow: "Who to follow",
     },
 
     labels: {
@@ -74,6 +75,7 @@ const TRANSLATIONS = {
       createPost: "Criar nova publicação",
       followers: "Seguidores",
       following: "Seguindo",
+      whoToFollow: "Quem seguir",
     },
 
     labels: {

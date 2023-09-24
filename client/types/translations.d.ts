@@ -58,6 +58,7 @@ interface ITexts {
   createPost: string;
   followers: string;
   following: string;
+  whoToFollow: string;
 }
 
 interface IPlaceholders {

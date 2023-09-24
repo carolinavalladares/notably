@@ -85,4 +85,15 @@ class UserController extends Controller
         // return timeline to client
         return response()->json(['timeline' => $sortedTimeline]);
     }
+
+    public function userSuggestions()
+    {
+        $users = User::all()->whereNotIn("id", auth()->user()->following)->except(["id", "==", auth()->user()->id]);
+
+        if (count($users) <= 10) {
+            return $users;
+        } else {
+            return $users->random(10);
+        }
+    }
 }

@@ -68,6 +68,9 @@ Route::middleware("auth:sanctum")->group(function () {
     // get user timeline
     Route::get("/timeline", [UserController::class, 'timeline']);
 
+    // get user suggestions
+    Route::get("/suggestions", [UserController::class, 'userSuggestions']);
+
 });
 
 

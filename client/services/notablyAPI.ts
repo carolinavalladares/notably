@@ -2,7 +2,7 @@
 
 import { ILoginData, IPostData, IRegisterData } from "@/types/types";
 import { api } from "./notablyAPIConfig";
-import { parseCookies } from "nookies";
+import { parseCookies } from "nookies/dist";
 
 // Log in
 export const login = async ({ email, password }: ILoginData) => {
@@ -89,4 +89,52 @@ export const createPost = async ({ content }: IPostData) => {
       headers: { Authorization: `Bearer ${decodedToken}` },
     }
   );
+};
+
+// Get Timeline
+export const fetchTimeline = async () => {
+  const { notably_token: token } = parseCookies();
+  const decodedToken = decodeURI(token);
+
+  return await api.get("/timeline", {
+    headers: {
+      Authorization: `Bearer ${decodedToken}`,
+    },
+  });
+};
+
+// Get follow suggestions
+export const getUsersSuggestions = async () => {
+  const { notably_token: token } = parseCookies();
+  const decodedToken = decodeURI(token);
+
+  try {
+    return (
+      await api.get("/suggestions", {
+        headers: {
+          Authorization: `Bearer ${decodedToken}`,
+        },
+      })
+    ).data;
+  } catch (e) {
+    return console.log(e);
+  }
+};
+
+// Get one user
+export const getOneUser = async (id: number) => {
+  const { notably_token: token } = parseCookies();
+  const decodedToken = decodeURI(token);
+
+  try {
+    return (
+      await api.get(`/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${decodedToken}`,
+        },
+      })
+    ).data.user;
+  } catch (e) {
+    return console.log(e);
+  }
 };

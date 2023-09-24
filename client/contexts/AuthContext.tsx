@@ -8,7 +8,7 @@ import {
 } from "@/services/notablyAPI";
 import { ILoginData, IRegisterData, IUser } from "@/types/types";
 import { useRouter } from "next/navigation";
-import { parseCookies, setCookie, destroyCookie } from "nookies";
+import { parseCookies, setCookie, destroyCookie } from "nookies/dist";
 import { createContext, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
