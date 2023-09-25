@@ -57,6 +57,7 @@ const TRANSLATIONS = {
       loginFailed: "Failed to login... Try again.",
       registerFailed: "Failed to register... Try again.",
       logoutFailed: "Failed to logout...",
+      registerSuccess: "User registered successfully. Log in to your account.",
     },
   },
   portuguese: {
@@ -117,6 +118,8 @@ const TRANSLATIONS = {
       loginFailed: "Falha ao entrar... Tente novamente.",
       registerFailed: "Falha ao cadastrar... Tente novamente.",
       logoutFailed: "Falha ao sair...",
+      registerSuccess:
+        "Usuário cadastrado com sucesso. Faça login na sua conta.",
     },
   },
 };

@@ -7,6 +7,7 @@ import AvatarSelect from "@/components/AvatarSelect";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import Button from "@/components/Button";
 
 interface IFormValues {
   email: string;
@@ -25,6 +26,7 @@ const page = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormValues>();
+  const [loading, setLoading] = useState(false);
 
   // redirect to home page in case the user is logged in
   useEffect(() => {
@@ -33,13 +35,15 @@ const page = () => {
     }
   }, []);
 
-  const submit: SubmitHandler<IFormValues> = (values) => {
+  const submit: SubmitHandler<IFormValues> = async (values) => {
     const { email, name, password, confirmPassword } = values;
 
     if (password !== confirmPassword) {
       console.log(TRANSLATIONS[language].validation.password);
       return toast.error(TRANSLATIONS[language].validation.password);
     }
+
+    setLoading(true);
 
     const registerData = {
       email,
@@ -49,10 +53,14 @@ const page = () => {
     };
 
     try {
-      signUp(registerData);
+      await signUp(registerData);
+
+      toast.success(TRANSLATIONS[language].validation.registerSuccess);
     } catch (e) {
-      return toast.error(TRANSLATIONS[language].validation.registerFailed);
+      toast.error(TRANSLATIONS[language].validation.registerFailed);
     }
+
+    setLoading(false);
   };
 
   return (
@@ -164,12 +172,13 @@ const page = () => {
               )}
             </div>
             <div className="flex justify-end">
-              <button
+              {/* submit btn */}
+              <Button
+                type="submit"
+                label={TRANSLATIONS[language].labels.register}
                 title={TRANSLATIONS[language].labels.register}
-                className="w-full bg-accent text-white font-semibold text-base px-4 py-2 justify-self-end"
-              >
-                {TRANSLATIONS[language].labels.register}
-              </button>
+                loading={loading}
+              />
             </div>
 
             <p className="text-text-color text-[13px] text-center mt-4">

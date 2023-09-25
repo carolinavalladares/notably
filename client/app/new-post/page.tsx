@@ -1,5 +1,6 @@
 "use client";
 import TRANSLATIONS from "@/CONSTS/translations";
+import Button from "@/components/Button";
 import Editor from "@/components/Editor";
 import useAuth from "@/hooks/useAuth";
 import useTranslation from "@/hooks/useTranslation";
@@ -7,18 +8,20 @@ import { createPost } from "@/services/notablyAPI";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { CHARACTERLIMIT } from "@/CONSTS/editor";
 
 const page = () => {
   const [content, setContent] = useState("");
+  const [loading, setLoading] = useState(false);
   const { language } = useTranslation();
-  const { user, getMe } = useAuth();
+  const { getMe } = useAuth();
   const router = useRouter();
 
   const handleCreatePost = async (content: string) => {
     if (content == "") {
       return;
     }
+
+    setLoading(true);
 
     try {
       await createPost({ content });
@@ -29,8 +32,11 @@ const page = () => {
 
       await getMe();
 
-      return router.push(`/${user?.id}`);
+      setLoading(false);
+
+      return router.push(`/me`);
     } catch (e) {
+      setLoading(false);
       return toast.error("error creating new post...");
     }
   };
@@ -44,14 +50,14 @@ const page = () => {
       <div className="p-4 bg-background-primary text-text-color shadow-md">
         <Editor content={content} setContent={setContent} />
 
-        <div className="flex justify-end">
-          <button
-            onClick={() => handleCreatePost(content)}
+        <div className="ml-auto my-0 w-20">
+          <Button
+            type="submit"
+            label={TRANSLATIONS[language].labels.post}
             title={TRANSLATIONS[language].labels.post}
-            className="bg-accent text-white py-2 px-4"
-          >
-            {TRANSLATIONS[language].labels.post}
-          </button>
+            onClick={() => handleCreatePost(content)}
+            loading={loading}
+          />
         </div>
       </div>
     </div>

@@ -43,6 +43,7 @@ export default function RootLayout({
                 color: `var(--text)`,
               }}
               closeButton={false}
+              position="top-center"
             />
 
             <Footer />

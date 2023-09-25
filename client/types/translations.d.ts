@@ -19,6 +19,7 @@ interface IValidation {
   loginFailed: string;
   registerFailed: string;
   logoutFailed: string;
+  registerSuccess: string;
 }
 interface ILabels {
   register: string;

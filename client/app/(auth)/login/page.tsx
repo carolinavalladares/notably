@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import TRANSLATIONS from "@/CONSTS/translations";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useTranslation from "@/hooks/useTranslation";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import Button from "@/components/Button";
 
 interface IFormValues {
   email: string;
@@ -22,6 +23,7 @@ const login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormValues>();
+  const [loading, setLoading] = useState(false);
 
   // redirect to home page in case the user is logged in
   useEffect(() => {
@@ -32,13 +34,16 @@ const login = () => {
 
   const submit: SubmitHandler<IFormValues> = async (values) => {
     const { email, password } = values;
+    setLoading(true);
 
     try {
       await signIn({ email, password });
     } catch (e) {
       console.log(e);
-      return toast.error(TRANSLATIONS[language].validation.loginFailed);
+      toast.error(TRANSLATIONS[language].validation.loginFailed);
     }
+
+    setLoading(false);
   };
 
   return (
@@ -99,12 +104,13 @@ const login = () => {
               )}
             </div>
             <div className="flex justify-end">
-              <button
+              {/* submit btn */}
+              <Button
                 title={TRANSLATIONS[language].labels.login}
-                className="w-full bg-accent text-white font-semibold text-base capitalize px-4 py-2 justify-self-end"
-              >
-                {TRANSLATIONS[language].labels.login}
-              </button>
+                label={TRANSLATIONS[language].labels.login}
+                type="submit"
+                loading={loading}
+              />
             </div>
 
             <p className="text-text-color text-[13px] text-center mt-4">
