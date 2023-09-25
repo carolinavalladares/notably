@@ -91,6 +91,8 @@ class UserController extends Controller
         $id = auth()->user()->id;
         $authUser = UserResource::make(auth()->user());
 
+
+        // get all users that are not in the authenticated user's following array, except the authenticated user
         $users = User::all()->whereNotIn("id", $authUser->following->pluck("id"))->except(["id", "==", $id]);
 
 
