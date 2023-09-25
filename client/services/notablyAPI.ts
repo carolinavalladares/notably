@@ -96,6 +96,10 @@ export const fetchTimeline = async () => {
   const { notably_token: token } = parseCookies();
   const decodedToken = decodeURI(token);
 
+  if (!token) {
+    return;
+  }
+
   return await api.get("/timeline", {
     headers: {
       Authorization: `Bearer ${decodedToken}`,
@@ -107,6 +111,10 @@ export const fetchTimeline = async () => {
 export const getUsersSuggestions = async () => {
   const { notably_token: token } = parseCookies();
   const decodedToken = decodeURI(token);
+
+  if (!token) {
+    return;
+  }
 
   try {
     return (
@@ -125,6 +133,10 @@ export const getUsersSuggestions = async () => {
 export const getOneUser = async (id: number) => {
   const { notably_token: token } = parseCookies();
   const decodedToken = decodeURI(token);
+
+  if (!token) {
+    return;
+  }
 
   try {
     return (

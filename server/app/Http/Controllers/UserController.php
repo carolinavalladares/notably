@@ -88,9 +88,14 @@ class UserController extends Controller
 
     public function userSuggestions()
     {
-        $users = User::all()->whereNotIn("id", auth()->user()->following)->except(["id", "==", auth()->user()->id]);
+        $id = auth()->user()->id;
+        $authUser = UserResource::make(auth()->user());
 
-        if (count($users) <= 10) {
+        $users = User::all()->whereNotIn("id", $authUser->following->pluck("id"))->except(["id", "==", $id]);
+
+
+
+        if ($users->count() <= 10) {
             return $users;
         } else {
             return $users->random(10);
