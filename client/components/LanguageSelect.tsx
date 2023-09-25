@@ -37,7 +37,7 @@ const LanguageSelect = () => {
         </button>
 
         {open && (
-          <div className="w-64 z-50  bg-background-primary shadow-md shadow-shadow-color p-4 absolute right-24 translate-x-1/2 top-[calc(100%+10px)]">
+          <div className="w-64 z-50  bg-background-primary shadow-md shadow-shadow-color p-4 absolute right-[120px] translate-x-1/2 top-[calc(100%+10px)]">
             <p className="mb-2 font-medium text-sm">
               {TRANSLATIONS[language].labels.chooseLanguage}
             </p>
