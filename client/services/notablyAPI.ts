@@ -150,3 +150,47 @@ export const getOneUser = async (id: number) => {
     return console.log(e);
   }
 };
+
+// follow a user
+export const followUser = async (id: number) => {
+  const { notably_token: token } = parseCookies();
+  const decodedToken = decodeURI(token);
+
+  if (!token) {
+    return;
+  }
+
+  try {
+    return (
+      await api.get(`/users/follow/${id}`, {
+        headers: {
+          Authorization: `Bearer ${decodedToken}`,
+        },
+      })
+    ).data;
+  } catch (e) {
+    return console.log(e);
+  }
+};
+
+// unfollow a user
+export const unfollowUser = async (id: number) => {
+  const { notably_token: token } = parseCookies();
+  const decodedToken = decodeURI(token);
+
+  if (!token) {
+    return;
+  }
+
+  try {
+    return (
+      await api.get(`/users/unfollow/${id}`, {
+        headers: {
+          Authorization: `Bearer ${decodedToken}`,
+        },
+      })
+    ).data;
+  } catch (e) {
+    return console.log(e);
+  }
+};
