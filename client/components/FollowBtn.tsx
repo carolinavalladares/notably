@@ -23,7 +23,7 @@ const FollowBtn = ({ isFollowing, userToFollow }: IProps) => {
     } else {
       setBtnText(TRANSLATIONS[language].labels.follow);
     }
-  }, [isFollowing]);
+  }, [isFollowing, language]);
 
   const handleFollow = async () => {
     if (!userToFollow || !user) {
