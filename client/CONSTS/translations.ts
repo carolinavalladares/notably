@@ -64,6 +64,8 @@ const TRANSLATIONS = {
       registerSuccess: "User registered successfully. Log in to your account.",
       userEditSuccess: "User updated successfully",
       userEditFail: "Failed to update user...",
+      emailUnique:
+        "Email must be unique... This email has already been registered...",
     },
   },
   portuguese: {
@@ -132,6 +134,7 @@ const TRANSLATIONS = {
         "Usuário cadastrado com sucesso. Faça login na sua conta.",
       userEditSuccess: "Usuário atualizado com sucesso",
       userEditFail: "Falha ao atualizar usuário...",
+      emailUnique: "Email deve ser único... este email já foi cadastrado...",
     },
   },
 };

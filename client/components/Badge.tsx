@@ -12,9 +12,9 @@ const Badge = () => {
   const { user, signOut } = useAuth();
   const { language } = useTranslation();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     try {
-      signOut();
+      await signOut();
     } catch (e) {
       return toast.error(TRANSLATIONS[language].validation.logoutFailed);
     }

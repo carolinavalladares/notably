@@ -22,6 +22,7 @@ interface IValidation {
   registerSuccess: string;
   userEditSuccess: string;
   userEditFail: string;
+  emailUnique: string;
 }
 interface ILabels {
   register: string;

@@ -56,7 +56,14 @@ const page = () => {
       await signUp(registerData);
 
       toast.success(TRANSLATIONS[language].validation.registerSuccess);
-    } catch (e) {
+    } catch (e: any) {
+      // email must be unique error message
+      if (e.response.data.message.includes("users.email")) {
+        setLoading(false);
+        return toast.error(TRANSLATIONS[language].validation.emailUnique);
+      }
+
+      // general error message
       toast.error(TRANSLATIONS[language].validation.registerFailed);
     }
 
