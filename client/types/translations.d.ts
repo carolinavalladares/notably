@@ -66,6 +66,7 @@ interface ITexts {
   following: string;
   whoToFollow: string;
   editProfile: string;
+  noSuggestions: string;
 }
 
 interface IPlaceholders {

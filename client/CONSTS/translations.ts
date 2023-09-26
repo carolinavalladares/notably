@@ -17,6 +17,7 @@ const TRANSLATIONS = {
       following: "Following",
       whoToFollow: "Who to follow",
       editProfile: "Edit account",
+      noSuggestions: "No suggestions at the moment",
     },
 
     labels: {
@@ -86,6 +87,7 @@ const TRANSLATIONS = {
       following: "Seguindo",
       whoToFollow: "Quem seguir",
       editProfile: "Editar conta",
+      noSuggestions: "Sem sugestões no momento",
     },
 
     labels: {
