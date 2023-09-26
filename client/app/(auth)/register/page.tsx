@@ -8,6 +8,7 @@ import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import Button from "@/components/Button";
+import Loading from "@/components/Loading";
 
 interface IFormValues {
   email: string;
@@ -17,7 +18,7 @@ interface IFormValues {
 }
 
 const page = () => {
-  const { user, signUp } = useAuth();
+  const { user, signUp, userLoading } = useAuth();
   const router = useRouter();
   const { language } = useTranslation();
   const [image, setImage] = useState<string>("avatar_01");
@@ -30,7 +31,7 @@ const page = () => {
 
   // redirect to home page in case the user is logged in
   useEffect(() => {
-    if (user == undefined) {
+    if (userLoading) {
       return;
     }
 
@@ -38,6 +39,11 @@ const page = () => {
       return router.push("/");
     }
   }, [user]);
+
+  // display loading screen
+  if (userLoading) {
+    return <Loading />;
+  }
 
   const submit: SubmitHandler<IFormValues> = async (values) => {
     const { email, name, password, confirmPassword } = values;

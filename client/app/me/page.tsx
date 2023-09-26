@@ -9,14 +9,15 @@ import { formatMemberSince } from "@/utils/formatMemberSince";
 import Post from "@/components/Post";
 import formatHandle from "@/utils/formatHandle";
 import { UserCog } from "lucide-react";
+import Loading from "@/components/Loading";
 
 const page = () => {
-  const { user } = useAuth();
+  const { user, userLoading } = useAuth();
   const router = useRouter();
   const { language } = useTranslation();
 
   useEffect(() => {
-    if (user == undefined) {
+    if (userLoading) {
       return;
     }
 
@@ -24,6 +25,11 @@ const page = () => {
       return router.push("/login");
     }
   }, [user]);
+
+  // display loading screen
+  if (userLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="py-4">

@@ -18,6 +18,7 @@ interface IAuthContext {
   signOut: () => void;
   signUp: ({ email, password, name, image }: IRegisterData) => void;
   getMe: () => void;
+  userLoading: boolean;
 }
 
 interface IProps {
@@ -28,9 +29,17 @@ export const AuthContext = createContext({} as IAuthContext);
 
 const AuthContextProvider = ({ children }: IProps) => {
   const [user, setUser] = useState<IUser | null | undefined>(undefined);
+  const [userLoading, setUserLoading] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
 
+  useEffect(() => {
+    if (user != undefined) {
+      setUserLoading(false);
+    }
+  }, [user]);
+
+  // get logged in user
   useEffect(() => {
     const { notably_token: token } = parseCookies();
 
@@ -93,7 +102,9 @@ const AuthContextProvider = ({ children }: IProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut, signUp, getMe }}>
+    <AuthContext.Provider
+      value={{ user, signIn, signOut, signUp, getMe, userLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );

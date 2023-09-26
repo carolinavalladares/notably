@@ -5,22 +5,23 @@ import { useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useState } from "react";
 import Badge from "@/components/Badge";
 import Timeline from "@/components/Timeline";
-import { Plus } from "lucide-react";
+import { Divide, Plus } from "lucide-react";
 import TRANSLATIONS from "@/CONSTS/translations";
 import useTranslation from "@/hooks/useTranslation";
 import User from "@/components/User";
 import { IUser } from "@/types/types";
 import { getUsersSuggestions } from "@/services/notablyAPI";
+import Loading from "@/components/Loading";
 
 export default function Home() {
-  const { user } = useAuth();
+  const { user, userLoading } = useAuth();
   const { language } = useTranslation();
   const router = useRouter();
   const [users, setUsers] = useState<IUser[] | null>(null);
 
   // redirect to login page in case the user is not logged in
   useEffect(() => {
-    if (user == undefined) {
+    if (userLoading) {
       return;
     }
 
@@ -41,6 +42,11 @@ export default function Home() {
 
     setUsers(usersSuggestions as IUser[]);
   };
+
+  // display loading screen
+  if (userLoading) {
+    return <Loading />;
+  }
 
   return (
     <main className="py-4 flex items-start gap-4">

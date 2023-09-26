@@ -3,6 +3,7 @@
 import TRANSLATIONS from "@/CONSTS/translations";
 import Avatar from "@/components/Avatar";
 import FollowBtn from "@/components/FollowBtn";
+import Loading from "@/components/Loading";
 import Post from "@/components/Post";
 import useAuth from "@/hooks/useAuth";
 import useTranslation from "@/hooks/useTranslation";
@@ -14,7 +15,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const page = () => {
-  const { user } = useAuth();
+  const { user, userLoading } = useAuth();
   const [userPage, setUserPage] = useState<IUser | null>(null);
   const [isFollowing, setIsFollowing] = useState(false);
   const path = usePathname();
@@ -36,7 +37,7 @@ const page = () => {
 
   // protect route
   useEffect(() => {
-    if (user == undefined) {
+    if (userLoading) {
       return;
     }
 
@@ -56,6 +57,11 @@ const page = () => {
       setIsFollowing(false);
     }
   }, [user, userPage]);
+
+  // display loading screen
+  if (userLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="py-4">

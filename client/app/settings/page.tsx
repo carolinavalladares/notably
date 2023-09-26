@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import Button from "@/components/Button";
 import { editUser } from "@/services/notablyAPI";
+import Loading from "@/components/Loading";
 
 interface IFormValues {
   email: string;
@@ -19,7 +20,7 @@ interface IFormValues {
 }
 
 export default function page() {
-  const { user, getMe } = useAuth();
+  const { user, getMe, userLoading } = useAuth();
   const router = useRouter();
   const { language } = useTranslation();
   const [image, setImage] = useState<string>("avatar_01");
@@ -33,7 +34,7 @@ export default function page() {
 
   // redirect to home page in case the user is logged in
   useEffect(() => {
-    if (user == undefined) {
+    if (userLoading) {
       return;
     }
 
@@ -80,6 +81,11 @@ export default function page() {
 
     return router.push("/me");
   };
+
+  // display loading screen
+  if (userLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="pt-6">
