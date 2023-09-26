@@ -6,15 +6,26 @@ import useAuth from "@/hooks/useAuth";
 import useTranslation from "@/hooks/useTranslation";
 import { createPost } from "@/services/notablyAPI";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const page = () => {
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
   const { language } = useTranslation();
-  const { getMe } = useAuth();
+  const { getMe, user } = useAuth();
   const router = useRouter();
+
+  // restrict route
+  useEffect(() => {
+    if (user == undefined) {
+      return;
+    }
+
+    if (user == null) {
+      return router.push("/login");
+    }
+  }, [user]);
 
   const handleCreatePost = async (content: string) => {
     if (content == "") {

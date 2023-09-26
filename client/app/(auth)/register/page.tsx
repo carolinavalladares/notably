@@ -30,10 +30,14 @@ const page = () => {
 
   // redirect to home page in case the user is logged in
   useEffect(() => {
+    if (user == undefined) {
+      return;
+    }
+
     if (user) {
       return router.push("/");
     }
-  }, []);
+  }, [user]);
 
   const submit: SubmitHandler<IFormValues> = async (values) => {
     const { email, name, password, confirmPassword } = values;

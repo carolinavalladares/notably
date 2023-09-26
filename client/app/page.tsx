@@ -2,7 +2,7 @@
 import useAuth from "@/hooks/useAuth";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Badge from "@/components/Badge";
 import Timeline from "@/components/Timeline";
 import { Plus } from "lucide-react";
@@ -20,10 +20,14 @@ export default function Home() {
 
   // redirect to login page in case the user is not logged in
   useEffect(() => {
-    if (!user) {
+    if (user == undefined) {
+      return;
+    }
+
+    if (user == null) {
       return router.push("/login");
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     getSuggestions();

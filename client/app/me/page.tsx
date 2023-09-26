@@ -16,7 +16,11 @@ const page = () => {
   const { language } = useTranslation();
 
   useEffect(() => {
-    if (!user) {
+    if (user == undefined) {
+      return;
+    }
+
+    if (user == null) {
       return router.push("/login");
     }
   }, [user]);

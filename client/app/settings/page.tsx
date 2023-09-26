@@ -33,7 +33,11 @@ export default function page() {
 
   // redirect to home page in case the user is logged in
   useEffect(() => {
-    if (!user) {
+    if (user == undefined) {
+      return;
+    }
+
+    if (user == null) {
       return router.push("/login");
     }
 

@@ -13,7 +13,7 @@ import { createContext, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 interface IAuthContext {
-  user: IUser | null;
+  user: IUser | null | undefined;
   signIn: ({ email, password }: ILoginData) => void;
   signOut: () => void;
   signUp: ({ email, password, name, image }: IRegisterData) => void;
@@ -27,12 +27,16 @@ interface IProps {
 export const AuthContext = createContext({} as IAuthContext);
 
 const AuthContextProvider = ({ children }: IProps) => {
-  const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUser | null | undefined>(undefined);
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
     const { notably_token: token } = parseCookies();
+
+    if (!token) {
+      return router.push("/login");
+    }
 
     if (token) {
       getMe();
@@ -42,7 +46,10 @@ const AuthContextProvider = ({ children }: IProps) => {
   const getMe = async () => {
     const data = await getLoggedInUser();
 
+    console.log(data);
     if (!data) {
+      setUser(null);
+
       return router.push("/login");
     }
 
@@ -53,6 +60,11 @@ const AuthContextProvider = ({ children }: IProps) => {
 
   const signIn = async ({ email, password }: ILoginData) => {
     const data = await login({ email, password });
+
+    if (!data) {
+      setUser(null);
+      return;
+    }
 
     // save token in cookies
     setCookie(undefined, "notably_token", data.token);

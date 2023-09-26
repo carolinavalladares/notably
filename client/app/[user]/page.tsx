@@ -34,8 +34,13 @@ const page = () => {
     setUserPage(resp);
   };
 
+  // protect route
   useEffect(() => {
-    if (!user) {
+    if (user == undefined) {
+      return;
+    }
+
+    if (user == null) {
       return router.push("/login");
     }
 
