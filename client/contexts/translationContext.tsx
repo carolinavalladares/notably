@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 interface ITranslationContext {
   language: keyof ITranslations;
@@ -16,7 +16,19 @@ interface IProps {
 }
 
 export default function TranslationContextProvider({ children }: IProps) {
-  const [language, setLanguage] = useState<keyof ITranslations>("portuguese");
+  const [language, setLanguage] = useState<keyof ITranslations>(
+    localStorage.getItem("notably_language")
+      ? (localStorage.getItem("notably_language") as keyof ITranslations)
+      : // browser language
+      navigator.language == "pt-BR" || "pt-PT"
+      ? "portuguese"
+      : "english"
+  );
+
+  // when language changes set localStorage to current language
+  useEffect(() => {
+    localStorage.setItem("notably_language", language);
+  }, [language]);
 
   return (
     <TranslationContext.Provider value={{ language, setLanguage }}>
