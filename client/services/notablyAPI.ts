@@ -1,6 +1,11 @@
 "use client";
 
-import { ILoginData, IPostData, IRegisterData } from "@/types/types";
+import {
+  IEditUserData,
+  ILoginData,
+  IPostData,
+  IRegisterData,
+} from "@/types/types";
 import { api } from "./notablyAPIConfig";
 import { parseCookies } from "nookies/dist";
 
@@ -189,6 +194,32 @@ export const unfollowUser = async (id: number) => {
           Authorization: `Bearer ${decodedToken}`,
         },
       })
+    ).data;
+  } catch (e) {
+    return console.log(e);
+  }
+};
+
+// edit user
+export const editUser = async (id: number, data: IEditUserData) => {
+  const { notably_token: token } = parseCookies();
+  const decodedToken = decodeURI(token);
+
+  if (!token) {
+    return;
+  }
+
+  try {
+    return (
+      await api.patch(
+        `/users/edit/${id}`,
+        { ...data },
+        {
+          headers: {
+            Authorization: `Bearer ${decodedToken}`,
+          },
+        }
+      )
     ).data;
   } catch (e) {
     return console.log(e);

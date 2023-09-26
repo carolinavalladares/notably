@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PostResource;
-use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\UserResource;
+
 
 class UserController extends Controller
 {
 
+
+    // list all users
     public function index()
     {
         // get all existing users
         return UserResource::collection(User::all());
     }
 
+
+    // get one user
     public function show(User $user)
     {
         // get one specific user
@@ -29,6 +34,32 @@ class UserController extends Controller
         return UserResource::make(auth()->user());
     }
 
+
+    // Edit user
+    public function update(Request $request, User $user)
+    {
+
+        $values = $request->validate([
+            'name' => ['required'],
+            "email" => ['required'],
+            'image' => ['required'],
+            'password' => ['sometimes', 'nullable']
+        ]);
+
+
+
+        if (auth()->user()->id != $user->id) {
+            abort(401, "You do not have permission to edit this account...");
+        }
+
+
+        $user->update($values);
+
+        return response()->json(['message' => 'successfully updated...'], 200);
+    }
+
+
+    // follow user
     public function follow(User $user)
     {
 
@@ -43,6 +74,7 @@ class UserController extends Controller
         return response()->json(['message' => "You are now following $user->name."], 200);
     }
 
+    // unfollow user
     public function unfollow(User $user)
     {
 
@@ -58,6 +90,8 @@ class UserController extends Controller
         return response()->json(['message' => "You are no longer following $user->name."], 200);
     }
 
+
+    // Get timeline
     public function timeline()
     {
 
@@ -86,6 +120,8 @@ class UserController extends Controller
         return response()->json(['timeline' => $sortedTimeline]);
     }
 
+
+    // Get user suggestions to follow
     public function userSuggestions()
     {
         $id = auth()->user()->id;

@@ -33,6 +33,9 @@ Route::middleware("auth:sanctum")->group(function () {
     // get one specific user
     Route::get("/users/{user}", [UserController::class, 'show']);
 
+    // edit user
+    Route::patch("/users/edit/{user}", [UserController::class, 'update']);
+
     // follow a user 
     Route::get("/users/follow/{user}", [UserController::class, 'follow']);
 

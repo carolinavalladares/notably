@@ -14,8 +14,8 @@ class RegisterController extends Controller
 
         // Validate request data sent by client
         $userData = $request->validate([
-            'name' => ['required'],
-            'email' => ['required', 'email'],
+            'name' => ['required', 'unique'],
+            'email' => ['required', 'email', 'unique'],
             'password' => ['required'],
             'image' => ['required']
         ]);

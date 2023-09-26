@@ -1,6 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
 import TRANSLATIONS from "@/CONSTS/translations";
+import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useTranslation from "@/hooks/useTranslation";
 import AvatarSelect from "@/components/AvatarSelect";
@@ -8,6 +9,7 @@ import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import Button from "@/components/Button";
+import { editUser } from "@/services/notablyAPI";
 
 interface IFormValues {
   email: string;
@@ -16,8 +18,8 @@ interface IFormValues {
   confirmPassword: string;
 }
 
-const page = () => {
-  const { user, signUp } = useAuth();
+export default function page() {
+  const { user, getMe } = useAuth();
   const router = useRouter();
   const { language } = useTranslation();
   const [image, setImage] = useState<string>("avatar_01");
@@ -25,58 +27,66 @@ const page = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<IFormValues>();
   const [loading, setLoading] = useState(false);
 
   // redirect to home page in case the user is logged in
   useEffect(() => {
-    if (user) {
-      return router.push("/");
+    if (!user) {
+      return router.push("/login");
     }
-  }, []);
+
+    setImage(user.image);
+    setValue("name", user.name);
+    setValue("email", user.email);
+  }, [user]);
 
   const submit: SubmitHandler<IFormValues> = async (values) => {
+    if (!user) {
+      return;
+    }
+
     const { email, name, password, confirmPassword } = values;
 
-    if (password !== confirmPassword) {
-      console.log(TRANSLATIONS[language].validation.password);
-      return toast.error(TRANSLATIONS[language].validation.password);
+    if (password != "") {
+      if (password !== confirmPassword) {
+        console.log(TRANSLATIONS[language].validation.password);
+        return toast.error(TRANSLATIONS[language].validation.password);
+      }
     }
 
     setLoading(true);
 
-    const registerData = {
-      email,
-      name,
-      password,
-      image,
-    };
-
     try {
-      await signUp(registerData);
+      await editUser(
+        user.id,
+        password != ""
+          ? { email, name, password, image }
+          : { email, name, image }
+      );
 
-      toast.success(TRANSLATIONS[language].validation.registerSuccess);
+      await getMe();
+      toast.success(TRANSLATIONS[language].validation.userEditSuccess);
     } catch (e) {
-      toast.error(TRANSLATIONS[language].validation.registerFailed);
+      toast.error(TRANSLATIONS[language].validation.userEditFail);
     }
 
     setLoading(false);
+
+    return router.push("/me");
   };
 
   return (
-    <div>
-      <h1 className="text-text-color py-7 text-center text-3xl font-bold">
-        {TRANSLATIONS[language].text.welcomeText}
-      </h1>
-
-      {/* Register form */}
+    <div className="pt-6">
+      {/* Edit profile form */}
       <div className="flex items-center justify-center">
         <form
           onSubmit={handleSubmit(submit)}
           className="bg-background-primary p-4 w-full max-w-lg shadow-md"
         >
           <h2 className="text-text-color text-lg font-medium">
-            {TRANSLATIONS[language].text.registerTitle}
+            {TRANSLATIONS[language].text.editProfile}
           </h2>
 
           <div className="flex items-center justify-center my-2">
@@ -90,19 +100,14 @@ const page = () => {
                 {TRANSLATIONS[language].labels.username}:
               </label>
               <input
+                disabled
                 type="text"
                 placeholder={TRANSLATIONS[language].placeholders.unsername}
-                className={`placeholder:text-sm bg-background-primary border  focus:border-gray-700 outline-none h-10 px-2 text-sm text-text-color placeholder:font-extralight placeholder:text-text-color ${
+                className={`placeholder:text-sm bg-background-primary border  focus:border-gray-700 outline-none h-10 px-2 text-sm text-text-color placeholder:font-extralight placeholder:text-text-color opacity-70 ${
                   errors.name ? "border-rose-500" : "border-border-color"
                 }`}
                 {...register("name", { required: true })}
               />
-
-              {errors.name && (
-                <p className="absolute text-rose-500 font-medium text-[11px] top-full">
-                  {TRANSLATIONS[language].validation.required}
-                </p>
-              )}
             </div>
             {/* Email input */}
             <div className="flex flex-col mb-6 relative">
@@ -110,19 +115,14 @@ const page = () => {
                 {TRANSLATIONS[language].labels.email}:
               </label>
               <input
+                disabled
                 type="email"
                 placeholder={TRANSLATIONS[language].placeholders.email}
-                className={`placeholder:text-sm bg-background-primary border  focus:border-gray-700 outline-none h-10 px-2 text-sm text-text-color placeholder:font-extralight placeholder:text-text-color ${
+                className={`placeholder:text-sm bg-background-primary border  focus:border-gray-700 outline-none h-10 px-2 text-sm text-text-color placeholder:font-extralight placeholder:text-text-color opacity-70 ${
                   errors.email ? "border-rose-500" : "border-border-color"
                 }`}
                 {...register("email", { required: true })}
               />
-
-              {errors.email && (
-                <p className="absolute text-rose-500 font-medium text-[11px] top-full">
-                  {TRANSLATIONS[language].validation.required}
-                </p>
-              )}
             </div>
             {/* Password input */}
             <div className="flex flex-col mb-6 relative">
@@ -131,18 +131,12 @@ const page = () => {
               </label>
               <input
                 type="password"
-                placeholder={TRANSLATIONS[language].placeholders.password}
+                placeholder={TRANSLATIONS[language].placeholders.editPassword}
                 className={`placeholder:text-sm bg-background-primary border  focus:border-gray-700 outline-none h-10 px-2 text-sm text-text-color placeholder:font-extralight placeholder:text-text-color ${
                   errors.password ? "border-rose-500" : "border-border-color"
                 }`}
-                {...register("password", { required: true })}
+                {...register("password")}
               />
-
-              {errors.password && (
-                <p className="absolute text-rose-500 font-medium text-[11px] top-full">
-                  {TRANSLATIONS[language].validation.required}
-                </p>
-              )}
             </div>
             {/* Confirm password input */}
             <div className="flex flex-col mb-6 relative">
@@ -162,36 +156,21 @@ const page = () => {
                     ? "border-rose-500"
                     : "border-border-color"
                 }`}
-                {...register("confirmPassword", { required: true })}
+                {...register("confirmPassword")}
               />
-
-              {errors.confirmPassword && (
-                <p className="absolute text-rose-500 font-medium text-[11px] top-full">
-                  {TRANSLATIONS[language].validation.required}
-                </p>
-              )}
             </div>
             <div className="flex justify-end">
               {/* submit btn */}
               <Button
                 type="submit"
-                label={TRANSLATIONS[language].labels.register}
-                title={TRANSLATIONS[language].labels.register}
+                label={TRANSLATIONS[language].labels.save}
+                title={TRANSLATIONS[language].labels.save}
                 loading={loading}
               />
             </div>
-
-            <p className="text-text-color text-[13px] text-center mt-4">
-              {TRANSLATIONS[language].text.hasAccount}{" "}
-              <a className="text-accent hover:underline" href="/login">
-                {TRANSLATIONS[language].labels.login}
-              </a>
-            </p>
           </div>
         </form>
       </div>
     </div>
   );
-};
-
-export default page;
+}

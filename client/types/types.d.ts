@@ -40,3 +40,10 @@ export interface IPost {
 export interface IPostData {
   content: string;
 }
+
+export interface IEditUserData {
+  name: string;
+  email: string;
+  image: string;
+  password?: string;
+}

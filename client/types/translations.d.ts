@@ -20,6 +20,8 @@ interface IValidation {
   registerFailed: string;
   logoutFailed: string;
   registerSuccess: string;
+  userEditSuccess: string;
+  userEditFail: string;
 }
 interface ILabels {
   register: string;
@@ -45,6 +47,7 @@ interface ILabels {
   bold: string;
   italic: string;
   editProfile: string;
+  save: string;
 }
 
 interface ITexts {
@@ -61,6 +64,7 @@ interface ITexts {
   followers: string;
   following: string;
   whoToFollow: string;
+  editProfile: string;
 }
 
 interface IPlaceholders {
@@ -69,4 +73,5 @@ interface IPlaceholders {
   confirnPassword: string;
   unsername: string;
   post: string;
+  editPassword: string;
 }

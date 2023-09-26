@@ -16,6 +16,7 @@ const TRANSLATIONS = {
       followers: "Followers",
       following: "Following",
       whoToFollow: "Who to follow",
+      editProfile: "Edit account",
     },
 
     labels: {
@@ -43,13 +44,15 @@ const TRANSLATIONS = {
       bold: "Bold",
       italic: "Italic",
       editProfile: "Edit account",
+      save: "Save changes",
     },
     placeholders: {
       email: "Type your email...",
       password: "Type your password...",
-      confirmPassword: "Type your password again...",
+      confirmPassword: "Type password again...",
       unsername: "Type username...",
       post: "What do you have to say?",
+      editPassword: "Enter new password...",
     },
 
     validation: {
@@ -59,6 +62,8 @@ const TRANSLATIONS = {
       registerFailed: "Failed to register... Try again.",
       logoutFailed: "Failed to logout...",
       registerSuccess: "User registered successfully. Log in to your account.",
+      userEditSuccess: "User updated successfully",
+      userEditFail: "Failed to update user...",
     },
   },
   portuguese: {
@@ -78,6 +83,7 @@ const TRANSLATIONS = {
       followers: "Seguidores",
       following: "Seguindo",
       whoToFollow: "Quem seguir",
+      editProfile: "Editar conta",
     },
 
     labels: {
@@ -105,13 +111,15 @@ const TRANSLATIONS = {
       bold: "Negrito",
       italic: "Itálico",
       editProfile: "Editar conta",
+      save: "Salvar",
     },
     placeholders: {
       email: "Digite o seu email...",
       password: "Digite sua senha...",
-      confirmPassword: "Digite sua senha de novo...",
+      confirmPassword: "Digite a senha de novo...",
       unsername: "Digite nome de usuário...",
       post: "O que você tem a dizer?",
+      editPassword: "Digite a nova senha...",
     },
 
     validation: {
@@ -122,6 +130,8 @@ const TRANSLATIONS = {
       logoutFailed: "Falha ao sair...",
       registerSuccess:
         "Usuário cadastrado com sucesso. Faça login na sua conta.",
+      userEditSuccess: "Usuário atualizado com sucesso",
+      userEditFail: "Falha ao atualizar usuário...",
     },
   },
 };

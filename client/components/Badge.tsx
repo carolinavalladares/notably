@@ -4,7 +4,7 @@ import Avatar from "./Avatar";
 import useAuth from "@/hooks/useAuth";
 import TRANSLATIONS from "@/CONSTS/translations";
 import useTranslation from "@/hooks/useTranslation";
-import { LogOut, UserCog } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { toast } from "react-toastify";
 import formatHandle from "@/utils/formatHandle";
 
@@ -30,7 +30,7 @@ const Badge = () => {
               <Avatar width="60px" image={user.image as string} />
 
               <div className="mb-2 mt-1">
-                <p className="text-sm font-medium   text-center capitalize leading-none ">
+                <p className="text-sm font-medium text-center capitalize leading-none ">
                   {user.name}
                 </p>
                 <p className="text-xs  text-center ">

@@ -8,6 +8,7 @@ import useTranslation from "@/hooks/useTranslation";
 import { formatMemberSince } from "@/utils/formatMemberSince";
 import Post from "@/components/Post";
 import formatHandle from "@/utils/formatHandle";
+import { UserCog } from "lucide-react";
 
 const page = () => {
   const { user } = useAuth();
@@ -23,7 +24,7 @@ const page = () => {
   return (
     <div className="py-4">
       {user && (
-        <section className="bg-background-primary text-text-color p-4 flex flex-col items-center shadow-md">
+        <section className="relative bg-background-primary text-text-color p-4 flex flex-col items-center shadow-md">
           <div>
             <Avatar width="70px" image={user.image} />
             <div className="mb-2 mt-2">
@@ -49,17 +50,29 @@ const page = () => {
           </div>
 
           <div>
-            <div className="flex items-center justify-center text-sm gap-4 mb-2">
-              <div className="flex flex-col items-center">
+            <div className="flex items-center justify-center text-xs gap-4 mb-2">
+              <div className="flex flex-col items-center ">
                 <span>{TRANSLATIONS[language].text.followers}</span>
-                <span className="font-medium">{user.followers.length}</span>
+                <span className="font-semibold text-sm">
+                  {user.followers.length}
+                </span>
               </div>
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center ">
                 <span>{TRANSLATIONS[language].text.following}</span>
-                <span className="font-medium">{user.following.length}</span>
+                <span className="font-semibold text-sm">
+                  {user.following.length}
+                </span>
               </div>
             </div>
           </div>
+
+          <a
+            title={TRANSLATIONS[language].labels.editProfile}
+            href="/settings"
+            className="absolute top-1 right-1 p-4 "
+          >
+            <UserCog size={20} strokeWidth={1.75} />
+          </a>
         </section>
       )}
 
