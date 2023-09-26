@@ -7,6 +7,7 @@ import TRANSLATIONS from "@/CONSTS/translations";
 import useTranslation from "@/hooks/useTranslation";
 import { formatMemberSince } from "@/utils/formatMemberSince";
 import Post from "@/components/Post";
+import formatHandle from "@/utils/formatHandle";
 
 const page = () => {
   const { user } = useAuth();
@@ -25,11 +26,18 @@ const page = () => {
         <section className="bg-background-primary text-text-color p-4 flex flex-col items-center shadow-md">
           <div>
             <Avatar width="70px" image={user.image} />
-            <div className="mb-2">
-              <p className="text-sm font-medium my-1  text-center ">
-                @{user.name}
-              </p>
-              <div className="text-xs font-light flex flex-col text-center">
+            <div className="mb-2 mt-2">
+              {/* username and handle */}
+              <div className="flex flex-col justify-center items-center mb-2">
+                <p className="font-medium w-fit  leading-none text-center mb-1">
+                  {user.name}
+                </p>
+                <p className="text-xs w-fit  leading-none  text-center ">
+                  {formatHandle(user.name)}
+                </p>
+              </div>
+
+              <div className="text-xs font-light  text-center">
                 <span className="leading-none">
                   {TRANSLATIONS[language].text.memberSince}:{" "}
                 </span>

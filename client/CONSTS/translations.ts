@@ -42,6 +42,7 @@ const TRANSLATIONS = {
       underline: "Underline",
       bold: "Bold",
       italic: "Italic",
+      editProfile: "Edit account",
     },
     placeholders: {
       email: "Type your email...",
@@ -103,6 +104,7 @@ const TRANSLATIONS = {
       underline: "Sublinhado",
       bold: "Negrito",
       italic: "Itálico",
+      editProfile: "Editar conta",
     },
     placeholders: {
       email: "Digite o seu email...",

@@ -8,6 +8,7 @@ import useAuth from "@/hooks/useAuth";
 import useTranslation from "@/hooks/useTranslation";
 import { getOneUser } from "@/services/notablyAPI";
 import { IUser } from "@/types/types";
+import formatHandle from "@/utils/formatHandle";
 import { formatMemberSince } from "@/utils/formatMemberSince";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -58,13 +59,18 @@ const page = () => {
           <div>
             {/* user image */}
             <Avatar width="70px" image={userPage.image} />
-            <div className="mb-2">
-              {/* user name */}
-              <p className="text-sm font-medium my-1  text-center ">
-                @{userPage.name}
-              </p>
-              {/* member since */}
-              <div className="text-xs font-light flex flex-col text-center">
+            <div className="mb-2 mt-2">
+              {/* username and handle */}
+              <div className="flex flex-col justify-center items-center mb-2">
+                <p className="font-medium w-fit  leading-none text-center mb-1">
+                  {userPage.name}
+                </p>
+                <p className="text-xs w-fit  leading-none  text-center ">
+                  {formatHandle(userPage.name)}
+                </p>
+              </div>
+
+              <div className="text-xs font-light  text-center">
                 <span className="leading-none">
                   {TRANSLATIONS[language].text.memberSince}:{" "}
                 </span>

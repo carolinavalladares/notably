@@ -44,6 +44,7 @@ interface ILabels {
   underline: string;
   bold: string;
   italic: string;
+  editProfile: string;
 }
 
 interface ITexts {
