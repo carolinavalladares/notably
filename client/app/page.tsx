@@ -41,7 +41,9 @@ export default function Home() {
         <Badge />
 
         {/* User suggestions */}
-        <UserSuggestions />
+        <div className="bg-background-primary text-text-color mt-4 shadow-md p-4">
+          <UserSuggestions />
+        </div>
       </div>
 
       <section className="flex-1">

@@ -32,31 +32,29 @@ const UserSuggestions = () => {
 
   return (
     <div>
-      <div className="bg-background-primary text-text-color mt-4 shadow-md p-4">
-        <h2 className="mb-2 font-medium text-center">
-          {TRANSLATIONS[language].text.whoToFollow}
-        </h2>
+      <h2 className="mb-2 font-medium text-center">
+        {TRANSLATIONS[language].text.whoToFollow}
+      </h2>
 
-        {loading ? (
-          <div className="h-36 w-full flex items-center justify-center">
-            <span className="h-fit w-fit block animate-spin">
-              <Loader />
-            </span>
-          </div>
-        ) : (
-          <div>
-            {users && users.length > 0 ? (
-              users.map((item, i) => {
-                return <User user={item} key={i} />;
-              })
-            ) : (
-              <div className="text-sm font-light text-center h-32 flex items-center justify-center">
-                <span>{TRANSLATIONS[language].text.noSuggestions}</span>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
+      {loading ? (
+        <div className="h-36 w-full flex items-center justify-center">
+          <span className="h-fit w-fit block animate-spin">
+            <Loader />
+          </span>
+        </div>
+      ) : (
+        <div>
+          {users && users.length > 0 ? (
+            users.map((item, i) => {
+              return <User user={item} key={i} />;
+            })
+          ) : (
+            <div className="text-sm font-light text-center h-32 flex items-center justify-center">
+              <span>{TRANSLATIONS[language].text.noSuggestions}</span>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

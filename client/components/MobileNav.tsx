@@ -4,11 +4,14 @@ import Avatar from "./Avatar";
 import formatHandle from "@/utils/formatHandle";
 import TRANSLATIONS from "@/CONSTS/translations";
 import { toast } from "react-toastify";
-import { LogOut } from "lucide-react";
+import { LogOut, Users, X } from "lucide-react";
+import { useState } from "react";
+import UserSuggestions from "./UserSuggestions";
 
 const MobileNav = () => {
   const { user, signOut } = useAuth();
   const { language } = useTranslation();
+  const [suggestionsOpen, setSuggestionsOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -38,7 +41,13 @@ const MobileNav = () => {
           </div>
         )}
 
-        <div>
+        <div className="flex items-center justify-center gap-4">
+          <button
+            onClick={() => setSuggestionsOpen((prev) => !prev)}
+            title={TRANSLATIONS[language].text.whoToFollow}
+          >
+            <Users />
+          </button>
           {/* Logout button */}
           <button
             onClick={handleLogout}
@@ -48,6 +57,18 @@ const MobileNav = () => {
             <LogOut size={20} strokeWidth={2} />
           </button>
         </div>
+
+        {suggestionsOpen && (
+          <div className="fixed inset-0 bg-background-primary text-text-color p-4 ">
+            <button
+              onClick={() => setSuggestionsOpen((prev) => !prev)}
+              className="absolute top-4 right-4"
+            >
+              <X size={20} strokeWidth={1.75} />
+            </button>
+            <UserSuggestions />
+          </div>
+        )}
       </div>
     </div>
   );
