@@ -5,7 +5,7 @@ import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import TranslationContextProvider from "@/contexts/TranslationContext";
+import TranslationContextProvider from "@/contexts/translationContext";
 import Footer from "@/components/Footer";
 import AuthContextProvider from "@/contexts/AuthContext";
 import { ToastContainer } from "react-toastify";

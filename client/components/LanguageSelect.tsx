@@ -7,7 +7,7 @@ import useTranslation from "@/hooks/useTranslation";
 const languages = ["english", "portuguese"];
 
 const LanguageSelect = () => {
-  const { language, setLanguage } = useTranslation();
+  const { language, changeLanguage } = useTranslation();
   const [open, setOpen] = useState(false);
 
   const handleLanguage = (
@@ -17,7 +17,7 @@ const LanguageSelect = () => {
 
     const name = target.getAttribute("name") as keyof ITranslations;
 
-    setLanguage(name);
+    changeLanguage(name);
 
     setOpen(false);
   };
