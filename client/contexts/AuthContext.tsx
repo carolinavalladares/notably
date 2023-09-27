@@ -57,7 +57,6 @@ const AuthContextProvider = ({ children }: IProps) => {
   const getMe = async () => {
     const data = await getLoggedInUser();
 
-    console.log(data);
     if (!data) {
       setUser(null);
 

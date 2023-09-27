@@ -37,8 +37,6 @@ export const getLoggedInUser = async () => {
       headers: { Authorization: `Bearer ${decodedToken}` },
     });
 
-    console.log(data);
-
     return data.data;
   } catch (error) {
     return console.error(error);
