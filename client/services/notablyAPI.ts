@@ -97,7 +97,7 @@ export const createPost = async ({ content }: IPostData) => {
 };
 
 // Get Timeline
-export const fetchTimeline = async () => {
+export const fetchTimeline = async (page?: number) => {
   const { notably_token: token } = parseCookies();
   const decodedToken = decodeURI(token);
 
@@ -105,7 +105,9 @@ export const fetchTimeline = async () => {
     return;
   }
 
-  return await api.get("/timeline", {
+  const url = page ? `/timeline?page=${page}` : "/timeline";
+
+  return await api.get(url, {
     headers: {
       Authorization: `Bearer ${decodedToken}`,
     },

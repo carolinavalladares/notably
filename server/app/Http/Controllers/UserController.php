@@ -117,7 +117,9 @@ class UserController extends Controller
 
 
         // return timeline to client
-        return response()->json(['timeline' => $sortedTimeline]);
+
+        // this piece of code: *$sortedTimeline->values()* returns object as an array;
+        return response()->json(['timeline' => $sortedTimeline->values()]);
     }
 
 

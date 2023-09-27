@@ -4,15 +4,24 @@ import useAuth from "@/hooks/useAuth";
 import useTranslation from "@/hooks/useTranslation";
 import { fetchTimeline } from "@/services/notablyAPI";
 import { useEffect, useState } from "react";
+import Post from "./Post";
+import { IPost } from "@/types/types";
 
 const Timeline = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<IPost[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const { language } = useTranslation();
   const { user } = useAuth();
 
-  const getTimeline = async () => {
+  const getTimeline = async (page?: number) => {
+    if (!user) {
+      return;
+    }
+
     try {
-      const timeline = (await fetchTimeline()).data.timeline;
+      const data = await fetchTimeline(page && page);
+
+      const timeline = data && data.data.timeline;
 
       console.log(timeline);
 
@@ -23,7 +32,7 @@ const Timeline = () => {
   };
 
   useEffect(() => {
-    getTimeline();
+    getTimeline(1);
   }, [user]);
 
   return (
@@ -34,7 +43,12 @@ const Timeline = () => {
             <p>{TRANSLATIONS[language].text.noPosts}</p>
           </div>
         ) : (
-          <div></div>
+          <div className="mt-4 flex flex-col gap-2">
+            {posts &&
+              posts.map((post, i) => {
+                return <Post post={post} key={i} />;
+              })}
+          </div>
         )}
       </div>
     </div>
