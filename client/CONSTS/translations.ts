@@ -19,6 +19,7 @@ const TRANSLATIONS = {
       editProfile: "Edit account",
       noSuggestions: "No suggestions at the moment",
       loading: "Loading...",
+      allSeen: "Yay! You have seen it all...",
     },
 
     labels: {
@@ -90,6 +91,7 @@ const TRANSLATIONS = {
       editProfile: "Editar conta",
       noSuggestions: "Sem sugestões no momento",
       loading: "Carregando...",
+      allSeen: "Eba! Você já viu tudo...",
     },
 
     labels: {

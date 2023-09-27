@@ -51,7 +51,7 @@ export default function Home() {
         </div>
       )}
 
-      <section className="flex-1">
+      <section className="flex-1 text-text-color">
         <div className="flex items-center justify-between">
           <h2 className="font-medium">Timeline</h2>
 

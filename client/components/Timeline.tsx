@@ -8,6 +8,7 @@ import Post from "./Post";
 import { IPost } from "@/types/types";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from "./Loading";
+import AllSeen from "./AllSeen";
 
 const Timeline = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -39,6 +40,7 @@ const Timeline = () => {
   };
 
   useEffect(() => {
+    // initial timeline fetch | refetches every time user changes
     getTimeline(1);
   }, [user]);
 
@@ -56,11 +58,7 @@ const Timeline = () => {
               next={() => getTimeline()}
               hasMore={!done ? true : false}
               loader={<Loading height="70px" />}
-              endMessage={
-                <p style={{ textAlign: "center" }}>
-                  <b>Yay! You have seen it all</b>
-                </p>
-              }
+              endMessage={<AllSeen />}
             >
               {posts &&
                 posts.map((post, i) => {
