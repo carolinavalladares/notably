@@ -46,7 +46,6 @@ const AuthContextProvider = ({ children }: IProps) => {
     if (!token) {
       setUser(null);
       setUserLoading(false);
-      return router.push("/login");
     }
 
     if (token) {
