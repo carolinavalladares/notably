@@ -44,6 +44,8 @@ const AuthContextProvider = ({ children }: IProps) => {
     const { notably_token: token } = parseCookies();
 
     if (!token) {
+      setUser(null);
+      setUserLoading(false);
       return router.push("/login");
     }
 

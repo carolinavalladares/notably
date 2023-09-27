@@ -33,11 +33,13 @@ export const getLoggedInUser = async () => {
   const decodedToken = decodeURI(token);
 
   try {
-    return (
-      await api.get("/user", {
-        headers: { Authorization: `Bearer ${decodedToken}` },
-      })
-    ).data;
+    const data = await api.get("/user", {
+      headers: { Authorization: `Bearer ${decodedToken}` },
+    });
+
+    console.log(data);
+
+    return data.data;
   } catch (error) {
     return console.error(error);
   }
