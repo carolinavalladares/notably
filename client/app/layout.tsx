@@ -38,7 +38,7 @@ export default function RootLayout({
           <TranslationContextProvider>
             <Header />
 
-            <div className="px-4 flex-1 max-w-4xl m-auto w-full">
+            <div className={`px-4 flex-1 max-w-4xl m-auto w-full `}>
               {children}
 
               {isMobile && (
@@ -59,7 +59,7 @@ export default function RootLayout({
               position="top-center"
             />
 
-            <Footer />
+            <Footer isMobile={isMobile} />
           </TranslationContextProvider>
         </AuthContextProvider>
       </body>
