@@ -12,12 +12,12 @@ import User from "@/components/User";
 import { IUser } from "@/types/types";
 import { getUsersSuggestions } from "@/services/notablyAPI";
 import Loading from "@/components/Loading";
+import UserSuggestions from "@/components/UserSuggestions";
 
 export default function Home() {
   const { user, userLoading } = useAuth();
   const { language } = useTranslation();
   const router = useRouter();
-  const [users, setUsers] = useState<IUser[] | null>(null);
 
   // redirect to login page in case the user is not logged in
   useEffect(() => {
@@ -30,19 +30,6 @@ export default function Home() {
     }
   }, [userLoading]);
 
-  useEffect(() => {
-    getSuggestions();
-  }, []);
-
-  const getSuggestions = async () => {
-    const usersSuggestions = await getUsersSuggestions();
-    if (!usersSuggestions) {
-      return;
-    }
-
-    setUsers(usersSuggestions as IUser[]);
-  };
-
   // display loading screen
   if (userLoading) {
     return <Loading />;
@@ -54,22 +41,7 @@ export default function Home() {
         <Badge />
 
         {/* User suggestions */}
-        <div className="bg-background-primary text-text-color mt-4 shadow-md p-4">
-          <h2 className="mb-2 font-medium text-center">
-            {TRANSLATIONS[language].text.whoToFollow}
-          </h2>
-          <div>
-            {users && users.length > 0 ? (
-              users.map((item, i) => {
-                return <User user={item} key={i} />;
-              })
-            ) : (
-              <div className="text-sm font-light text-center h-32 flex items-center justify-center">
-                <span>{TRANSLATIONS[language].text.noSuggestions}</span>
-              </div>
-            )}
-          </div>
-        </div>
+        <UserSuggestions />
       </div>
 
       <section className="flex-1">
