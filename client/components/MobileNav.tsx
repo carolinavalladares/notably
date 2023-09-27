@@ -23,7 +23,7 @@ const MobileNav = () => {
 
   return (
     <div className="fixed bottom-0 left-0 w-full bg-background-primary text-text-color shadow-md shadow-shadow-color py-2 px-4 ">
-      <div className="max-w-lg m-auto flex items-center justify-between">
+      <div className="flex items-center justify-between">
         {/* user  */}
         {user && (
           <div className=" w-fit">
