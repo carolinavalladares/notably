@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "client":"cd client && yarn dev",
+    "client": "cd client && yarn dev",
     "server": "cd server && php artisan serve",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "client_setup": "cd client && yarn",
@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^8.2.1"
+    "concurrently": "^8.2.1",
+    "react-responsive": "^9.0.2"
   }
 }
