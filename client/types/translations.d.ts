@@ -68,6 +68,8 @@ interface ITexts {
   editProfile: string;
   noSuggestions: string;
   loading: string;
+  allSeen: string;
+  refreshTimeline: string;
 }
 
 interface IPlaceholders {

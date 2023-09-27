@@ -2,15 +2,12 @@
 import useAuth from "@/hooks/useAuth";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect } from "react";
 import Badge from "@/components/Badge";
 import Timeline from "@/components/Timeline";
-import { Divide, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import TRANSLATIONS from "@/CONSTS/translations";
 import useTranslation from "@/hooks/useTranslation";
-import User from "@/components/User";
-import { IUser } from "@/types/types";
-import { getUsersSuggestions } from "@/services/notablyAPI";
 import Loading from "@/components/Loading";
 import UserSuggestions from "@/components/UserSuggestions";
 import { useMediaQuery } from "react-responsive";

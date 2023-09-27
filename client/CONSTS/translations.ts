@@ -20,6 +20,7 @@ const TRANSLATIONS = {
       noSuggestions: "No suggestions at the moment",
       loading: "Loading...",
       allSeen: "Yay! You have seen it all...",
+      refreshTimeline: "Refresh timeline",
     },
 
     labels: {
@@ -92,6 +93,7 @@ const TRANSLATIONS = {
       noSuggestions: "Sem sugestões no momento",
       loading: "Carregando...",
       allSeen: "Eba! Você já viu tudo...",
+      refreshTimeline: "Recarregar timeline",
     },
 
     labels: {

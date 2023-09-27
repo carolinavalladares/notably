@@ -15,11 +15,17 @@ const Timeline = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [done, setDone] = useState(false);
   const { language } = useTranslation();
-  const { user } = useAuth();
+  const { user, getMe } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const getTimeline = async (page?: number) => {
     if (!user) {
       return;
+    }
+
+    // if it's the first fetch show loading screen, otherwise loading will be handled by infinit scrolling component
+    if (currentPage == 1) {
+      setLoading(true);
     }
 
     try {
@@ -30,13 +36,24 @@ const Timeline = () => {
       setPosts([...posts, ...timeline]);
       setCurrentPage((prev) => prev + 1);
 
+      setLoading(false);
+
       // if current page is empty, stop fetching
       if (timeline.length < 1) {
         return setDone(true);
       }
     } catch (e) {
+      setLoading(false);
       return console.log("Error fetching timeline: ", e);
     }
+  };
+
+  const handleRefresh = async () => {
+    setCurrentPage(1);
+
+    await setPosts([]);
+
+    getMe();
   };
 
   useEffect(() => {
@@ -45,14 +62,23 @@ const Timeline = () => {
   }, [user]);
 
   return (
-    <div className="text-text-color w-full">
+    <div className="text-text-color w-full mt-4 ">
+      <button
+        onClick={handleRefresh}
+        title={TRANSLATIONS[language].text.refreshTimeline}
+        className="text-xs w-fit text-accent mb-2"
+      >
+        {TRANSLATIONS[language].text.refreshTimeline}
+      </button>
       <div>
-        {posts.length < 1 ? (
+        {loading ? (
+          <Loading />
+        ) : posts.length < 1 ? (
           <div className="flex items-center justify-center h-60 font-light text-sm">
             <p>{TRANSLATIONS[language].text.noPosts}</p>
           </div>
         ) : (
-          <div className=" mt-4">
+          <div>
             <InfiniteScroll
               dataLength={posts.length}
               next={() => getTimeline()}
