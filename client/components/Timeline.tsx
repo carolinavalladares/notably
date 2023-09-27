@@ -9,6 +9,7 @@ import { IPost } from "@/types/types";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from "./Loading";
 import AllSeen from "./AllSeen";
+import { RefreshCw } from "lucide-react";
 
 const Timeline = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -50,7 +51,7 @@ const Timeline = () => {
 
   const handleRefresh = async () => {
     setCurrentPage(1);
-
+    setDone(false);
     await setPosts([]);
 
     getMe();
@@ -66,8 +67,9 @@ const Timeline = () => {
       <button
         onClick={handleRefresh}
         title={TRANSLATIONS[language].text.refreshTimeline}
-        className="text-xs w-fit text-accent mb-2"
+        className="text-xs w-fit text-accent mb-2 font-medium flex items-center justify-center gap-1"
       >
+        <RefreshCw size={14} />
         {TRANSLATIONS[language].text.refreshTimeline}
       </button>
       <div>
