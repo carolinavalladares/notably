@@ -6,10 +6,14 @@ import { fetchTimeline } from "@/services/notablyAPI";
 import { useEffect, useState } from "react";
 import Post from "./Post";
 import { IPost } from "@/types/types";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Loading from "./Loading";
 
 const Timeline = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentFetch, setCurrentFetch] = useState<IPost[]>([]);
+  const [done, setDone] = useState(false);
   const { language } = useTranslation();
   const { user } = useAuth();
 
@@ -19,20 +23,31 @@ const Timeline = () => {
     }
 
     try {
-      const data = await fetchTimeline(page && page);
+      const data = await fetchTimeline(currentPage);
 
       const timeline = data && data.data.timeline;
 
       console.log(timeline);
 
-      setPosts(timeline);
+      setCurrentFetch(timeline);
+
+      setPosts([...posts, ...timeline]);
+      setCurrentPage((prev) => prev + 1);
+
+      if (timeline.length < 1) {
+        return setDone(true);
+      }
     } catch (e) {
       return console.log("Error fetching timeline: ", e);
     }
   };
 
   useEffect(() => {
-    getTimeline(1);
+    console.log(currentFetch);
+  }, [currentFetch]);
+
+  useEffect(() => {
+    getTimeline();
   }, [user]);
 
   return (
@@ -43,11 +58,27 @@ const Timeline = () => {
             <p>{TRANSLATIONS[language].text.noPosts}</p>
           </div>
         ) : (
-          <div className="mt-4 flex flex-col gap-2">
-            {posts &&
-              posts.map((post, i) => {
-                return <Post post={post} key={i} />;
-              })}
+          <div className=" mt-4">
+            <InfiniteScroll
+              dataLength={posts.length}
+              next={() => getTimeline()}
+              hasMore={!done ? true : false}
+              loader={<Loading height="70px" />}
+              endMessage={
+                <p style={{ textAlign: "center" }}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }
+            >
+              {posts &&
+                posts.map((post, i) => {
+                  return (
+                    <div key={i} className="mb-2">
+                      <Post post={post} />
+                    </div>
+                  );
+                })}
+            </InfiniteScroll>
           </div>
         )}
       </div>
