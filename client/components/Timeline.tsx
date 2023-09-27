@@ -12,7 +12,6 @@ import Loading from "./Loading";
 const Timeline = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentFetch, setCurrentFetch] = useState<IPost[]>([]);
   const [done, setDone] = useState(false);
   const { language } = useTranslation();
   const { user } = useAuth();
@@ -27,13 +26,10 @@ const Timeline = () => {
 
       const timeline = data && data.data.timeline;
 
-      console.log(timeline);
-
-      setCurrentFetch(timeline);
-
       setPosts([...posts, ...timeline]);
       setCurrentPage((prev) => prev + 1);
 
+      // if current page is empty, stop fetching
       if (timeline.length < 1) {
         return setDone(true);
       }
@@ -43,11 +39,7 @@ const Timeline = () => {
   };
 
   useEffect(() => {
-    console.log(currentFetch);
-  }, [currentFetch]);
-
-  useEffect(() => {
-    getTimeline();
+    getTimeline(1);
   }, [user]);
 
   return (

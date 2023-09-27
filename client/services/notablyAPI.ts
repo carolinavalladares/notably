@@ -114,6 +114,26 @@ export const fetchTimeline = async (page?: number) => {
   });
 };
 
+// getOnePost
+export const getOnePost = async (id: number) => {
+  if (!id) {
+    return;
+  }
+
+  const { notably_token: token } = parseCookies();
+  const decodedToken = decodeURI(token);
+
+  return (
+    await api.get(
+      `/posts/${id}`,
+
+      {
+        headers: { Authorization: `Bearer ${decodedToken}` },
+      }
+    )
+  ).data;
+};
+
 // Get follow suggestions
 export const getUsersSuggestions = async () => {
   const { notably_token: token } = parseCookies();

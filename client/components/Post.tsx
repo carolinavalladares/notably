@@ -6,7 +6,12 @@ import useTranslation from "@/hooks/useTranslation";
 import { Star } from "lucide-react";
 import { IPost } from "@/types/types";
 import useAuth from "@/hooks/useAuth";
-import { likePost, unlikePost } from "@/services/notablyAPI";
+import {
+  fetchTimeline,
+  getOnePost,
+  likePost,
+  unlikePost,
+} from "@/services/notablyAPI";
 import TRANSLATIONS from "@/CONSTS/translations";
 import Display from "./Display";
 
@@ -18,6 +23,7 @@ const Post = ({ post }: IProps) => {
   const { language } = useTranslation();
   const { user, getMe } = useAuth();
   const [likesPost, setLikesPost] = useState(false);
+  const [likes, setLikes] = useState(0);
 
   const handleLike = async () => {
     if (!user) {
@@ -34,21 +40,27 @@ const Post = ({ post }: IProps) => {
         setLikesPost(true);
       }
 
-      // refresh user
-      getMe();
+      // refetch post to set likes amount
+      const data = await getOnePost(post.id);
+
+      setLikes(data.post.likes.length);
     } catch (e) {
       return console.log(e);
     }
   };
 
   useEffect(() => {
-    if (user) {
+    if (user && post) {
       const like = post.likes?.find((like) => {
         return like.id == user.id;
       });
 
       if (like) {
         setLikesPost(true);
+
+        if (post.likes) {
+          setLikes(post.likes.length);
+        }
       }
     }
   }, [user]);
@@ -96,7 +108,7 @@ const Post = ({ post }: IProps) => {
                 strokeWidth={1.5}
                 fill={likesPost ? "var(--accent)" : "transparent"}
               />
-              <span className="text-xs">{post.likes?.length}</span>
+              <span className="text-xs">{likes}</span>
             </button>
           </div>
         </div>
