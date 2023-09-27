@@ -26,7 +26,7 @@ const page = () => {
     if (user == null) {
       return router.push("/login");
     }
-  }, [user]);
+  }, [userLoading]);
 
   const handleCreatePost = async (content: string) => {
     if (content == "") {

@@ -45,7 +45,7 @@ export default function page() {
     setImage(user.image);
     setValue("name", user.name);
     setValue("email", user.email);
-  }, [user]);
+  }, [userLoading]);
 
   const submit: SubmitHandler<IFormValues> = async (values) => {
     if (!user) {

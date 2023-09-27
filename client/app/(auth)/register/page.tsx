@@ -38,7 +38,7 @@ const page = () => {
     if (user) {
       return router.push("/");
     }
-  }, [user]);
+  }, [userLoading]);
 
   // display loading screen
   if (userLoading) {

@@ -24,7 +24,7 @@ const page = () => {
     if (user == null) {
       return router.push("/login");
     }
-  }, [user]);
+  }, [userLoading]);
 
   // display loading screen
   if (userLoading) {
@@ -40,7 +40,7 @@ const page = () => {
             <div className="mb-2 mt-2">
               {/* username and handle */}
               <div className="flex flex-col justify-center items-center mb-2">
-                <p className="font-medium w-fit  leading-none text-center mb-1">
+                <p className="font-medium w-fit  leading-none text-center mb-1 capitalize">
                   {user.name}
                 </p>
                 <p className="text-xs w-fit  leading-none  text-center ">

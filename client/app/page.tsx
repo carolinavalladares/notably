@@ -28,7 +28,7 @@ export default function Home() {
     if (user == null) {
       return router.push("/login");
     }
-  }, [user]);
+  }, [userLoading]);
 
   useEffect(() => {
     getSuggestions();

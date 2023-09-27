@@ -46,7 +46,7 @@ const page = () => {
     }
 
     getUser();
-  }, [user]);
+  }, [userLoading]);
 
   // determine if authenticated user follows this user
   useEffect(() => {
@@ -58,7 +58,6 @@ const page = () => {
     }
   }, [user, userPage]);
 
-  // display loading screen
   if (userLoading) {
     return <Loading />;
   }
@@ -73,7 +72,7 @@ const page = () => {
             <div className="mb-2 mt-2">
               {/* username and handle */}
               <div className="flex flex-col justify-center items-center mb-2">
-                <p className="font-medium w-fit  leading-none text-center mb-1">
+                <p className="font-medium w-fit  leading-none text-center mb-1 capitalize">
                   {userPage.name}
                 </p>
                 <p className="text-xs w-fit  leading-none  text-center ">
