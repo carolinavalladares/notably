@@ -68,7 +68,7 @@ const page = () => {
       toast.success(TRANSLATIONS[language].validation.registerSuccess);
     } catch (e: any) {
       // email must be unique error message
-      if (e.response.data.message.includes("users.email")) {
+      if (e.response.data && e.response.data.message.includes("users.email")) {
         setLoading(false);
         return toast.error(TRANSLATIONS[language].validation.emailUnique);
       }
