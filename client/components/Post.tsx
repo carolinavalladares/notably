@@ -6,12 +6,7 @@ import useTranslation from "@/hooks/useTranslation";
 import { Star } from "lucide-react";
 import { IPost } from "@/types/types";
 import useAuth from "@/hooks/useAuth";
-import {
-  fetchTimeline,
-  getOnePost,
-  likePost,
-  unlikePost,
-} from "@/services/notablyAPI";
+import { getOnePost, likePost, unlikePost } from "@/services/notablyAPI";
 import TRANSLATIONS from "@/CONSTS/translations";
 import Display from "./Display";
 
@@ -21,7 +16,7 @@ interface IProps {
 
 const Post = ({ post }: IProps) => {
   const { language } = useTranslation();
-  const { user, getMe } = useAuth();
+  const { user } = useAuth();
   const [likesPost, setLikesPost] = useState(false);
   const [likes, setLikes] = useState(0);
 
