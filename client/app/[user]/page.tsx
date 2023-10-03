@@ -111,7 +111,7 @@ const page = () => {
       )}
 
       {/* user's posts */}
-      <section className="mt-4">
+      <section className="mt-4 text-text-color">
         <h2 className="text-lg font-medium ml-2 mb-2 capitalize">
           {TRANSLATIONS[language].text.posts}
         </h2>

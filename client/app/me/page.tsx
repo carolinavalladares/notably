@@ -86,8 +86,8 @@ const page = () => {
         </section>
       )}
 
-      <section className="mt-4">
-        <h2 className="text-lg font-medium ml-2 mb-2">
+      <section className="mt-4 text-text-color">
+        <h2 className="text-lg font-medium ml-2 mb-2 ">
           {TRANSLATIONS[language].text.myPosts}
         </h2>
 
