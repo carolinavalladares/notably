@@ -8,3 +8,5 @@
 4. run `npm run setup` command in the root directory;
 
 After following these steps the project is ready, you can start the project by running `npm run start` in the root directory, the client will be up and running at **localhost:3000** and the server will be up and running at **localhost:8000**.
+
+Once the project is up and running you can access Notably API docs at **localhost:8000**.
