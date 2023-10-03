@@ -10,7 +10,6 @@ import Footer from "@/components/Footer";
 import AuthContextProvider from "@/contexts/AuthContext";
 import { ToastContainer } from "react-toastify";
 import MobileNav from "@/components/MobileNav";
-import { useMediaQuery } from "react-responsive";
 
 const poppins = Poppins({
   subsets: ["latin"],

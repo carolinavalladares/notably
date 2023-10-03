@@ -21,25 +21,27 @@ const MobileNav = () => {
     }
   };
 
+  if (!user) {
+    return <></>;
+  }
+
   return (
     <div className="fixed bottom-0 left-0 w-full bg-background-primary text-text-color shadow-md shadow-shadow-color py-2 px-4 ">
       <div className="flex items-center justify-between">
         {/* user  */}
-        {user && (
-          <div className=" w-fit">
-            <a
-              title={TRANSLATIONS[language].labels.myProfile}
-              className="flex items-center justify-center gap-2"
-              href="/me"
-            >
-              <Avatar width="50px" image={user.image} />
-              <div>
-                <p className="capitalize text-sm font-medium">{user.name}</p>
-                <p className="text-xs">{formatHandle(user.name)}</p>
-              </div>
-            </a>
-          </div>
-        )}
+        <div className=" w-fit">
+          <a
+            title={TRANSLATIONS[language].labels.myProfile}
+            className="flex items-center justify-center gap-2"
+            href="/me"
+          >
+            <Avatar width="50px" image={user.image} />
+            <div>
+              <p className="capitalize text-sm font-medium">{user.name}</p>
+              <p className="text-xs">{formatHandle(user.name)}</p>
+            </div>
+          </a>
+        </div>
 
         <div className="flex items-center justify-center gap-4">
           <button
@@ -57,7 +59,6 @@ const MobileNav = () => {
             <LogOut size={20} strokeWidth={2} />
           </button>
         </div>
-
         {suggestionsOpen && (
           <div className="fixed inset-0 bg-background-primary text-text-color p-4 ">
             <button
