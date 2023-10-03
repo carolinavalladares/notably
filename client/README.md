@@ -6,7 +6,7 @@ The application is set up to choose either dark or light theme according to the 
 
 ## Language
 
-The application is available in Portuguese and in English. The default language will be the language of the browser, if the browser language in not Portuguese, the default language will be set to English.
+The application is available in Portuguese and in English. The default language will be the language of the browser, if the browser language is not Portuguese, the default language will be set to English.
 
 The user can easily change the language in the app.
 
