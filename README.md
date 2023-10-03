@@ -1,5 +1,7 @@
 # Notably
 
+Notably is a simple social media app. The back-end was developed using Laravel and the front-end was developrd using NextJs.
+
 ### Project setup
 
 1. run `npm install` command in the root directory of the project;
