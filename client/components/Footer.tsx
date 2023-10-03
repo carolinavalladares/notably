@@ -3,15 +3,11 @@ import TRANSLATIONS from "@/CONSTS/translations";
 import useTranslation from "@/hooks/useTranslation";
 import React from "react";
 
-interface IProps {
-  isMobile: boolean;
-}
-
-const Footer = ({ isMobile }: IProps) => {
+const Footer = () => {
   const { language } = useTranslation();
 
   return (
-    <footer className={`text-text-color py-2 ${isMobile && "pb-[68px]"}`}>
+    <footer className={`text-text-color py-2 footer`}>
       <p className="text-[11px] font-light text-center">
         {TRANSLATIONS[language].labels.developedBy}{" "}
         <a

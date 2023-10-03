@@ -76,3 +76,21 @@ body {
   pointer-events: none;
   font-weight: 200;
 }
+
+.mobile-footer {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-footer {
+    display: block;
+  }
+
+  .footer {
+    padding-bottom: 68px;
+  }
+
+  .desktop {
+    display: none;
+  }
+}

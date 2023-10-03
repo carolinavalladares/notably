@@ -11,7 +11,6 @@ import AuthContextProvider from "@/contexts/AuthContext";
 import { ToastContainer } from "react-toastify";
 import MobileNav from "@/components/MobileNav";
 import { useMediaQuery } from "react-responsive";
-import { maxScreenWidth } from "@/CONSTS/mediaQuery";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -29,8 +28,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isMobile = useMediaQuery({ query: `(max-width: ${maxScreenWidth})` });
-
   return (
     <html lang="en">
       <body className={`${poppins.className} flex flex-col `}>
@@ -41,11 +38,9 @@ export default function RootLayout({
             <div className={`px-4 flex-1 max-w-4xl m-auto w-full `}>
               {children}
 
-              {isMobile && (
-                <div>
-                  <MobileNav />
-                </div>
-              )}
+              <div className="mobile-footer">
+                <MobileNav />
+              </div>
             </div>
 
             <ToastContainer
@@ -59,7 +54,7 @@ export default function RootLayout({
               position="top-center"
             />
 
-            <Footer isMobile={isMobile} />
+            <Footer />
           </TranslationContextProvider>
         </AuthContextProvider>
       </body>

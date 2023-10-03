@@ -11,13 +11,11 @@ import useTranslation from "@/hooks/useTranslation";
 import Loading from "@/components/Loading";
 import UserSuggestions from "@/components/UserSuggestions";
 import { useMediaQuery } from "react-responsive";
-import { maxScreenWidth } from "@/CONSTS/mediaQuery";
 
 export default function Home() {
   const { user, userLoading } = useAuth();
   const { language } = useTranslation();
   const router = useRouter();
-  const isMobile = useMediaQuery({ query: `(max-width: ${maxScreenWidth})` });
 
   // redirect to login page in case the user is not logged in
   useEffect(() => {
@@ -37,16 +35,14 @@ export default function Home() {
 
   return (
     <main className="py-4 flex items-start gap-4">
-      {!isMobile && (
-        <div className="w-full max-w-[250px]">
-          <Badge />
+      <div className="w-full max-w-[250px] desktop">
+        <Badge />
 
-          {/* User suggestions */}
-          <div className="bg-background-primary text-text-color mt-4 shadow-md p-4">
-            <UserSuggestions />
-          </div>
+        {/* User suggestions */}
+        <div className="bg-background-primary text-text-color mt-4 shadow-md p-4">
+          <UserSuggestions />
         </div>
-      )}
+      </div>
 
       <section className="flex-1 text-text-color">
         <div className="flex items-center justify-between">
