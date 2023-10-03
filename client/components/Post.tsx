@@ -57,10 +57,10 @@ const Post = ({ post }: IProps) => {
 
       if (like) {
         setLikesPost(true);
+      }
 
-        if (post.likes) {
-          setLikes(post.likes.length);
-        }
+      if (post.likes) {
+        setLikes(post.likes.length);
       }
     }
   }, [user]);
