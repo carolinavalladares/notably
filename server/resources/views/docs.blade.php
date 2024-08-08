@@ -43,7 +43,7 @@
                 <x-route-card requestData="" title="Current user" method='GET' url='user' description='Get user currently logged in.' />
                 <x-route-card requestData="" title="Get users" method='GET' url='users' description='Get a list of all users.' />
                 <x-route-card requestData="" title="Get one user" method='GET' url='users/{user_id}' description='Get one specific user.' />
-                <x-route-card requestData="" title="Get user suggestions" method='GET' url='suggestions' description="Get a list of ten users that the current user doen't follow yet." />
+                <x-route-card requestData="" title="Get user suggestions" method='GET' url='suggestions' description="Get a list of ten users that the current user doesn't follow yet." />
                 <x-route-card requestData="" title="Get timeline" method='GET' url='timeline' description='Get posts from the accounts that the current user follows. This request returns 10 posts per page.' />
                 <x-route-card requestData="{'name':string, 'image':string,'email':string, 'password'?:string}" title="Edit user" method='PATCH' url='users/edit/{user_id}' description='Edit a user.' />
                 <x-route-card requestData="" title="Follow User" method='GET' url='users/follow/{user_id}' description='Follow a user.' />
