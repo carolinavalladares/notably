@@ -37,7 +37,7 @@
 
         <section>
             <h3 class="font-semibold text-lg mb-2">Protected Routes</h3>
-            <p>To access there routes you are required to be authenticated.</p>
+            <p>To access these routes you are required to be authenticated.</p>
 
             <div class="my-2">
                 <x-route-card requestData="" title="Current user" method='GET' url='user' description='Get user currently logged in.' />
